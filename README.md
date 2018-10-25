@@ -1,2 +1,4 @@
 # FaceFood
-Group 21, This is a software about food sharing
+
+分享此时此刻享受美食的心情~
+
