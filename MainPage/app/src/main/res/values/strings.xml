@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">MainPage</string>
+    <string name="home">主页</string>
+    <string name="share">分享</string>
+    <string name="info">个人信息</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="Info_Fragment">Hello Info fragment</string>
+    <string name="Home_Fragment">Hello Home fragment</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string name="to_the_end">已经到底了</string>
+
+</resources>
