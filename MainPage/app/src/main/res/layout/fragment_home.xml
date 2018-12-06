@@ -6,11 +6,16 @@
     android:orientation="vertical"
     tools:context=".HomeFragment">
 
+    <!--<ImageView-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="257dp"-->
+        <!--android:src="@drawable/shousi" />-->
+
     <ListView
         android:id="@+id/list_view"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-        <!--android:dividerHeight="3dp">-->
+        android:layout_height="wrap_content"
+        android:dividerHeight="5dp">
 
     </ListView>
 
