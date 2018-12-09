@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:alpha="20"
+        android:background="@drawable/login_background">
+
+    </FrameLayout>
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:fitsSystemWindows="true">
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="120dp"
+            android:paddingLeft="24dp"
+            android:paddingRight="24dp">
+
+            <!--<ImageView android:src="@drawable/icon"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="72dp"-->
+                <!--android:layout_marginBottom="24dp"-->
+                <!--android:layout_gravity="center_horizontal" />-->
+
+            <!-- Email Label -->
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
+                android:textColorHint="@color/text_white"
+                app:hintTextAppearance="@style/hintText">
+                <EditText android:id="@+id/student_number"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/text_white"
+                    android:hint="学号" />
+            </android.support.design.widget.TextInputLayout>
+
+            <!-- Password Label -->
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
+                android:textColorHint="@color/text_white"
+                app:hintTextAppearance="@style/hintText">
+                <EditText android:id="@+id/student_password"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textPassword"
+                    android:textColor="@color/text_white"
+                    android:hint="密码"/>
+            </android.support.design.widget.TextInputLayout>
+
+            <android.support.v7.widget.AppCompatButton
+                android:id="@+id/btn_login"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:layout_marginBottom="24dp"
+                android:padding="12dp"
+                android:text="登录"/>
+
+            <TextView android:id="@+id/link_signup"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="150dp"
+                android:layout_marginBottom="24dp"
+                android:text="没有账号？马上加入！"
+                android:gravity="center"
+                android:textColor="@color/text_white"
+                android:textSize="16dip"/>
+
+        </LinearLayout>
+    </LinearLayout>
+
+</FrameLayout>
+
