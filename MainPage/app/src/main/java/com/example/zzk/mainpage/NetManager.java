@@ -1,12 +1,9 @@
 package com.example.zzk.mainpage;
 
-import android.renderscript.ScriptGroup;
-
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
-import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -16,7 +13,11 @@ import java.net.*;
 
 public class NetManager {
 
-    String path = "http://yummmy.cn/account";
+    String path;
+
+    public void setPath(String path) {
+        this.path = path;
+    }
 
     JSONObject postData(JSONObject jsonObject) throws Exception {
 

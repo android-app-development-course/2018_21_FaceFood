@@ -29,7 +29,7 @@
             android:layout_marginBottom="8dp"
             android:textColorHint="@color/text_white"
             app:hintTextAppearance="@style/hintText">
-            <EditText android:id="@+id/input_name"
+            <EditText android:id="@+id/input_nickname"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="textCapWords"
@@ -45,7 +45,7 @@
             android:layout_marginBottom="8dp"
             android:textColorHint="@color/text_white"
             app:hintTextAppearance="@style/hintText">
-            <EditText android:id="@+id/input_email"
+            <EditText android:id="@+id/input_number"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="textEmailAddress"

@@ -1,6 +1,5 @@
 package com.example.zzk.mainpage;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Handler;
 import android.os.Looper;
@@ -25,40 +24,34 @@ public class Login extends AppCompatActivity {
     private TextView createAccount;
     private NetManager netManager;
     private JsonManager jsonManager;
-    private String loginStatus;
     private Handler handler;
+    private LoginStatusKeeper loginStatusKeeper;
 
     // Login Status
     private final int LOGIN_SUCCESS = 1;
     private final int LOGIN_FAILED = 2;
 
-//    private Handler handler = new Handler() {
-//
-//        public void handlerMessage(Message message) {
-//
-//            if(message.what == LOGIN_SUCCESS) {
-//                Toast.makeText(getApplicationContext(), "登陆成功", Toast.LENGTH_LONG).show();
-//            }
-//            else if(message.what == LOGIN_FAILED) {
-//                Toast.makeText(getApplicationContext(), "登陆失败", Toast.LENGTH_LONG).show();
-//            }
-//        }
-//
-//    };
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        loginStatusKeeper = new LoginStatusKeeper();
+        if(loginStatusKeeper.getLoginStatus(getApplicationContext()) == loginStatusKeeper.LOGIN)
+        {
+            loginStatusKeeper.updateLoginStatus(getApplicationContext());
+            Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+            startActivity(intent);
+        }
 
         requestWindowFeature(Window.FEATURE_NO_TITLE);//will hide the title
         getSupportActionBar().hide(); //hide the title bar
 
         setContentView(R.layout.activity_login);
 
-        studentNumber = (EditText)findViewById(R.id.student_number);
-        password = (EditText)findViewById(R.id.student_password);
-        loginButton = (Button)findViewById(R.id.btn_login);
-        createAccount = (TextView)findViewById(R.id.link_signup);
+        studentNumber = findViewById(R.id.student_number);
+        password = findViewById(R.id.student_password);
+        loginButton = findViewById(R.id.btn_login);
+        createAccount = findViewById(R.id.link_signup);
 
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -80,6 +73,8 @@ public class Login extends AppCompatActivity {
         netManager = new NetManager();
         jsonManager = new JsonManager();
 
+        netManager.setPath("http://yummmy.cn/account");
+
         new Thread(new Runnable() {
             @Override
             public void run() {
@@ -93,6 +88,9 @@ public class Login extends AppCompatActivity {
 
                         if(message.what == LOGIN_SUCCESS) {
                             Toast.makeText(getApplicationContext(), "登陆成功", Toast.LENGTH_LONG).show();
+                            loginStatusKeeper.updateLoginStatus(getApplicationContext());
+                            Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                            startActivity(intent);
                         }
                         else if(message.what == LOGIN_FAILED) {
                             Toast.makeText(getApplicationContext(), "登陆失败", Toast.LENGTH_LONG).show();
@@ -117,7 +115,7 @@ public class Login extends AppCompatActivity {
                     JSONObject jsonObject = jsonManager.getAccountAndMd5(id, password);
                     JSONObject receiveJsonObject = netManager.postData(jsonObject);
 
-                    loginStatus = receiveJsonObject.getString("login");
+                    String loginStatus = receiveJsonObject.getString("login");
 
                     Message message = new Message();
 

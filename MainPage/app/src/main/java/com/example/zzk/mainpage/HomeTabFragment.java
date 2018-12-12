@@ -1,26 +1,18 @@
 package com.example.zzk.mainpage;
 
-import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.FrameLayout;
-import android.widget.ListView;
 
-import java.util.List;
-import java.util.Map;
 
 public class HomeTabFragment extends Fragment {
 
-    int color;
+//    private List<HomeFragment> homeFragments;
 
     public HomeTabFragment() {
     }
@@ -29,13 +21,21 @@ public class HomeTabFragment extends Fragment {
 
         View view = inflater.inflate(R.layout.fragment_home_tab, null);
 
-        ViewPager viewPager = (ViewPager) view.findViewById(R.id.pager);
+        ViewPager viewPager = view.findViewById(R.id.pager);
+        viewPager.setOffscreenPageLimit(3);
         PagerAdapter myPagerAdapter = new PagerAdapter(getFragmentManager(), 3);
+//        homeFragments = myPagerAdapter.getHomeFragments();
+
         viewPager.setAdapter(myPagerAdapter);
-        TabLayout tabLayout = (TabLayout) view.findViewById(R.id.tablayout);
+        TabLayout tabLayout = view.findViewById(R.id.tablayout);
         tabLayout.setupWithViewPager(viewPager);
 
         return view;
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
 
     }
+
 }

@@ -1,8 +1,6 @@
 package com.example.zzk.mainpage;
 
 import android.content.Context;
-import android.content.Intent;
-import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,10 +11,9 @@ import android.widget.Toast;
 
 import com.smarteist.autoimageslider.SliderLayout;
 import com.smarteist.autoimageslider.SliderView;
+import com.squareup.picasso.Picasso;
 
-import org.w3c.dom.Text;
-
-import java.sql.RowId;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -27,17 +24,37 @@ public class FoodAdapter extends BaseAdapter {
     private LayoutInflater layoutInflater;
     private Context context;
 
-//    private SliderLayout sliderLayout;
-
     private int TYPE_COUNT = 2;
 
 
     public FoodAdapter(Context context, List<Map<String, Object>> data, List<Map<String, Object>> recommand_food) {
 
         this.context = context;
-        this.data = data;
-        this.recommand_food = recommand_food;
+//        this.data = data;
+//        this.recommand_food = recommand_food;
         this.layoutInflater = LayoutInflater.from(context);
+
+        this.data = new ArrayList<>();
+        this.recommand_food = new ArrayList<>();
+
+        for(int i = 0; i < data.size(); i++) {
+            this.data.add(data.get(i));
+        }
+
+        for(int i = 0; i < recommand_food.size(); i++) {
+            this.recommand_food.add(recommand_food.get(i));
+        }
+
+    }
+
+    public void addMoreDate(List<Map<String, Object>> updateContent) {
+
+        for(int i = 0; i < updateContent.size(); i++) {
+
+            data.add(updateContent.get(i));
+
+        }
+
     }
 
     @Override
@@ -91,9 +108,8 @@ public class FoodAdapter extends BaseAdapter {
 
             convertView = layoutInflater.inflate(R.layout.recommand_item, null);
 
-            SliderLayout sliderLayout = (SliderLayout) convertView.findViewById(R.id.imageSlider);
+            SliderLayout sliderLayout = convertView.findViewById(R.id.imageSlider);
 
-//            sliderLayout = (SliderLayout)layoutInflater.inflate(R.layout.recommand_item, null).findViewById(R.id.imageSlider);
             sliderLayout.setIndicatorAnimation(SliderLayout.Animations.DROP);
             sliderLayout.setScrollTimeInSec(1);
 
@@ -102,14 +118,17 @@ public class FoodAdapter extends BaseAdapter {
                 SliderView sliderView = new SliderView(context);
 
                 String description = (String)recommand_food.get(i).get("recommand_food_description");
-                int imageID = (int)recommand_food.get(i).get("recommand_food_image");
+                String imagePath = (String) recommand_food.get(i).get("recommand_food_image");
+                imagePath = "http://yummmy.cn/" + imagePath;
 
-                sliderView.setImageDrawable(imageID);
+//                int imageID = (int) recommand_food.get(i).get("recommand_food_image");
+
+//                sliderView.setImageDrawable(imageID);
+                sliderView.setImageUrl(imagePath);
                 sliderView.setDescription(description);
 
                 sliderView.setImageScaleType(ImageView.ScaleType.CENTER_CROP);
                 final int finalI = position;
-
 
                 sliderView.setOnSliderClickListener(new SliderView.OnSliderClickListener() {
                     @Override
@@ -129,19 +148,27 @@ public class FoodAdapter extends BaseAdapter {
 
             convertView = layoutInflater.inflate(R.layout.food_item, null);
 
-            item.foodImage = (ImageView) convertView.findViewById(R.id.food_image);
+            item.foodImage = convertView.findViewById(R.id.food_image);
+            item.foodName = convertView.findViewById(R.id.food_name);
+            item.foodUp = convertView.findViewById(R.id.food_up);
+            item.foodDown = convertView.findViewById(R.id.food_down);
+            item.foodTime = convertView.findViewById(R.id.food_time);
+            item.foodPlace = convertView.findViewById(R.id.food_place);
 
-            item.foodName = (TextView) convertView.findViewById(R.id.food_name);
+            String imageURL = (String)data.get(position - 1).get("food_image");
+            imageURL = "http://www.yummmy.cn/" + imageURL;
+//
+//            try {
+//                loadImage.get(position - 1);
+//            }
+//            catch (IndexOutOfBoundsException e) {
+//                loadImage.add(1);
+//                new LoadNetImageView(item.foodImage).execute(imageURL);
+//            }
 
-            item.foodUp = (TextView) convertView.findViewById(R.id.food_up);
+            Picasso.get().load(imageURL).into(item.foodImage);
 
-            item.foodDown = (TextView) convertView.findViewById(R.id.food_down);
-
-            item.foodTime = (TextView) convertView.findViewById(R.id.food_time);
-
-            item.foodPlace = (TextView) convertView.findViewById(R.id.food_place);
-
-            item.foodImage.setImageResource((Integer) data.get(position - 1).get("food_image"));
+//            item.foodImage.setImageResource((Integer) data.get(position - 1).get("food_image"));
             item.foodUp.setText((String) data.get(position - 1).get("food_up"));
             item.foodDown.setText((String) data.get(position - 1).get("food_down"));
             item.foodName.setText((String) data.get(position - 1).get("food_name"));
