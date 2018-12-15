@@ -4,6 +4,12 @@ import org.json.JSONObject;
 
 public class JsonManager {
 
+    static public JSONObject getAccount(String id)throws org.json.JSONException{
+        JSONObject jsonObject =new JSONObject();
+        jsonObject.put("id",id);
+        return jsonObject;
+    }
+
     JSONObject getAccountAndMd5(String account, String password) {
 
         JSONObject jsonObject = new JSONObject();

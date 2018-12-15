@@ -19,7 +19,7 @@ public class NetManager {
         this.path = path;
     }
 
-    JSONObject postData(JSONObject jsonObject) throws Exception {
+    public JSONObject postData(JSONObject jsonObject) throws Exception {
 
         // throws Exception
         URL url = new URL(path);
