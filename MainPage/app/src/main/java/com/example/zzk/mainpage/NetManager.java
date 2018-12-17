@@ -1,5 +1,7 @@
 package com.example.zzk.mainpage;
 
+import android.util.Log;
+
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
@@ -10,6 +12,8 @@ import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.net.*;
+import java.util.Map;
+import java.util.Scanner;
 
 public class NetManager {
 
@@ -68,4 +72,39 @@ public class NetManager {
         return new JSONObject(json);
     }
 
+    //不要用这个函数
+    //to:http://129.204.49.159/getUserinfo
+    private static JSONObject sendGetRequest(String to, Map<String,String> param) {
+            StringBuilder msb = new StringBuilder();
+            for (Map.Entry<String, String> curr : param.entrySet()) {
+                msb.append(curr.getKey() + "=" + curr.getValue() + "&");
+            }
+            HttpURLConnection conn = null;
+            try {
+                String Strurl = to + "?" + msb.toString();
+                URL url = new URL(Strurl);
+                conn = (HttpURLConnection) url.openConnection();
+                conn.setConnectTimeout(5000);
+                conn.setRequestMethod("GET");
+                if (HttpURLConnection.HTTP_OK == conn.getResponseCode()) {
+                    Log.i("PostGetUtil", "get请求成功");
+                    InputStream in = conn.getInputStream();
+                    Scanner scanner = new Scanner(in);
+                    StringBuilder sb = new StringBuilder();
+                    while (scanner.hasNext()) {
+                        sb.append(scanner.nextLine());
+                    }
+                    String backcontent = sb.toString();
+                    backcontent = URLDecoder.decode(backcontent, "UTF-8");
+                    Log.i("SendGetRequest", backcontent);
+                    in.close();
+                    return new JSONObject(backcontent);
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            } finally {
+                conn.disconnect();
+            }
+            return null;
+        }
 }

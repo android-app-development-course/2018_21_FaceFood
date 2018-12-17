@@ -1,5 +1,6 @@
 package com.example.zzk.mainpage;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Handler;
 import android.os.Looper;
@@ -13,6 +14,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.example.cyy.module.UserInfo;
 
 import org.json.JSONObject;
 
@@ -74,7 +77,7 @@ public class Login extends AppCompatActivity {
         jsonManager = new JsonManager();
 
         netManager.setPath("http://yummmy.cn/account");
-
+        final Context ct = getApplicationContext();
         new Thread(new Runnable() {
             @Override
             public void run() {
@@ -90,6 +93,7 @@ public class Login extends AppCompatActivity {
                             Toast.makeText(getApplicationContext(), "登陆成功", Toast.LENGTH_LONG).show();
                             loginStatusKeeper.updateLoginStatus(getApplicationContext());
                             Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                            UserInfo.initUserInfo(studentNumber.getText().toString(),ct);
                             startActivity(intent);
                         }
                         else if(message.what == LOGIN_FAILED) {

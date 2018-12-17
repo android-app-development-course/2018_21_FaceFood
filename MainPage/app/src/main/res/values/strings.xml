@@ -104,6 +104,8 @@
     </string>
     <string name="action_settings">Settings</string>
     <string name="ErrorCannotGetUserInfo">There\'s a error exiting when trying to get user infomation.</string>
+    <string name="ErrorCannotUpdateUserInfo">There\'s a error updating user infomation</string>
+    <string name="SuccessUpdateUserInfo">Successfully update user infomation</string>
 
 
 </resources>

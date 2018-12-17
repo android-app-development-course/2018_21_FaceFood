@@ -1,27 +1,98 @@
 package com.example.cyy.module;
 
+import android.content.Context;
+import android.util.Log;
+import android.widget.Toast;
+
 import com.example.zzk.mainpage.JsonManager;
 import com.example.zzk.mainpage.NetManager;
+import com.example.zzk.mainpage.R;
+import com.loopj.android.http.AsyncHttpClient;
+import com.loopj.android.http.RequestParams;
+import com.loopj.android.http.TextHttpResponseHandler;
+import com.loopj.android.http.JsonHttpResponseHandler;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
-//单体类
+import java.util.HashMap;
+
+import cz.msebera.android.httpclient.Header;
+
+//暂时设计成单体类，如果以后需要查看、更改他人信息的话，再进行修改
 public class UserInfo {
-    static public UserInfo getTmpUsedUserInfo(){
-        return new UserInfo("陈舞阳","西三",null,"男","20161380241");
+    static public void initUserInfo(final String id, final Context context)
+    {
+        AsyncHttpClient client = new AsyncHttpClient();
+        RequestParams params = new RequestParams();
+        params.put("student_id", id);
+        client.get("http://129.204.49.159/getUserinfo", params, new JsonHttpResponseHandler() {
+                    @Override
+                    public void onSuccess(int statusCode, Header[] headers, JSONObject ret){
+                        // called when response HTTP status is "200 OK"
+                        try {
+                            Log.i("UserInfo","Successfully obaint user info");
+                            me = new UserInfo(ret.getString("nickName"), ret.getString("address"), ret.getString("profilePhotoAdd"), ret.getString("gender"), id);
+                        }catch (Exception e){
+                            Toast.makeText(context,context.getResources().getText(R.string.ErrorCannotGetUserInfo),Toast.LENGTH_LONG);
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(int statusCode, Header[] headers, String res, Throwable t) {
+                        // called when response HTTP status is "4XX" (eg. 401, 403, 404)
+                        Toast.makeText(context,context.getResources().getText(R.string.ErrorCannotGetUserInfo),Toast.LENGTH_LONG);
+                    }
+                }
+        );
     }
-    static public void initUserInfo(String id) throws Exception {
-        NetManager nm = new NetManager();
-        nm.setPath("http://yummmy.cn/getUserInfo");
-        JSONObject ret = nm.postData(JsonManager.getAccount(id));
-        me=new UserInfo(ret.getString("name"),ret.getString("add"),ret.getString("profilePhotoAdd"),ret.getString("gender"),id);
+    public boolean updateUserInfo(final Context context){
+        if(me==null){
+            return false;
+        }
+        AsyncHttpClient client = new AsyncHttpClient();
+        RequestParams params = new RequestParams();
+        params.put("student_id", id);
+        params.put("nickName",name);
+        if(profilePhotoAdd!=null)
+            params.put("profilePhotoAdd",profilePhotoAdd);
+        if(this.gender!=gender.UNKNOW)
+            params.put("gender",String.valueOf(gender.getValue()));
+        client.get("http://129.204.49.159/setUserinfo", params, new JsonHttpResponseHandler() {
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, JSONObject ret){
+                // called when response HTTP status is "200 OK"
+                Toast.makeText(context,context.getResources().getText(R.string.SuccessUpdateUserInfo),Toast.LENGTH_LONG);
+            }
+
+            @Override
+            public void onFailure(int statusCode, Header[] headers, String res, Throwable t) {
+                // called when response HTTP status is "4XX" (eg. 401, 403, 404)
+                Toast.makeText(context,context.getResources().getText(R.string.ErrorCannotUpdateUserInfo),Toast.LENGTH_LONG);
+            }
+        });
+        return true;
     }
     static public UserInfo getUser(){
         return me;
     }
     public enum Gender{
-        MALE,FEMALE,UNKNOW
+        MALE(0),FEMALE(1),UNKNOW(-1);
+        private int value;
+        private Gender(int value){
+            this.value=value;
+        }
+        int getValue(){return value;}
+        public String toString(){
+            switch (value) {
+                case 0:
+                    return "male";
+                case 1:
+                    return "female";
+                default:
+                    return "Unknow";
+            }
+        }
     };
 
     public String getName() {

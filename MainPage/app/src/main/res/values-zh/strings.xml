@@ -105,5 +105,7 @@
     </string>
     <string name="action_settings">设置</string>
     <string name="ErrorCannotGetUserInfo">在获取个人信息的时候发生错误</string>
+    <string name="ErrorCannotUpdateUserInfo">在更新个人信息的时候出现了异常</string>
+    <string name="SuccessUpdateUserInfo">成功更新个人信息</string>
 </resources>
 

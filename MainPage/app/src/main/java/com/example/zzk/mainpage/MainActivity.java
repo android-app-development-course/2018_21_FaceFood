@@ -9,6 +9,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 import android.view.Window;
 
+import com.example.zzk.mainpage.UserInfo.InfoFragment;
+
 import java.util.ArrayList;
 import java.util.List;
 
