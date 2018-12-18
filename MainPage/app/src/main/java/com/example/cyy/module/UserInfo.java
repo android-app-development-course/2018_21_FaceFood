@@ -5,6 +5,7 @@ import android.net.sip.SipSession;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.example.cyy.util.NetDoneListener;
 import com.example.zzk.mainpage.JsonManager;
 import com.example.zzk.mainpage.NetManager;
 import com.example.zzk.mainpage.R;
@@ -22,11 +23,11 @@ import cz.msebera.android.httpclient.Header;
 
 //暂时设计成单体类，如果以后需要查看、更改他人信息的话，再进行修改
 public class UserInfo {
-    static public void initUserInfo(final String id, final Context context)
+    static public void initUserInfo(final String id, final Context context, NetDoneListener netDoneListener)
     {
         me=new UserInfo();
         me.setId(id);
-        me.downdateUserInfo();
+        me.downdateUserInfo(netDoneListener);
     }
     static public void logOut(){
         me=null;
@@ -43,6 +44,8 @@ public class UserInfo {
             params.put("profilePhotoAdd",profilePhotoAdd);
         if(this.gender!=gender.UNKNOW)
             params.put("gender",String.valueOf(gender.getValue()));
+        if(this.add!=null)
+            params.put("address",this.add);
         client.get("http://129.204.49.159/setUserinfo", params, new JsonHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject ret){
@@ -58,7 +61,7 @@ public class UserInfo {
         });
         return true;
     }
-    public void downdateUserInfo(){
+    public void downdateUserInfo(final NetDoneListener netDoneListener){
         AsyncHttpClient client = new AsyncHttpClient();
         RequestParams params = new RequestParams();
         params.put("student_id", id);
@@ -74,6 +77,8 @@ public class UserInfo {
                             _this.setAdd(ret.getString("address"));
                             _this.setProfilePhotoAdd(ret.getString("profilePhotoAdd"));
                             _this.setGender(ret.getString("gender"));
+                            if(netDoneListener!=null)
+                                netDoneListener.OnNetDone();
                         }catch (Exception e){
                             UserInfo.logOut();
                         }

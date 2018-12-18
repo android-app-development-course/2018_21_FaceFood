@@ -17,6 +17,7 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.example.cyy.module.UserInfo;
+import com.example.cyy.util.NetDoneListener;
 import com.example.zzk.mainpage.R;
 import com.example.cyy.util.ImageViewUrlSetter;
 import com.loopj.android.http.AsyncHttpClient;
@@ -39,31 +40,32 @@ public class InfoFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-
-        UserInfo.initUserInfo("1",getContext());
-        info=UserInfo.getUser();
         View forRet = inflater.inflate(R.layout.fragment_info, null);
-
         viewPager= forRet.findViewById(R.id.htab_viewpager);
         tabLayout=forRet.findViewById(R.id.htab_tabs);
         photo=forRet.findViewById(R.id.htab_header);
 
+        UserInfo.initUserInfo("1", getContext(), new NetDoneListener() {
+            @Override
+            public void OnNetDone() {
+                new ImageViewUrlSetter(photo).set("http://yummmy.cn/"+info.getProfilePhotoAdd());
+            }
+        });
+        info=UserInfo.getUser();
+
         viewPager.setAdapter(new ViewPagerAdapter(getFragmentManager()));
         tabLayout.setupWithViewPager(viewPager);
-
-        new ImageViewUrlSetter(photo).set("http://yummmy.cn/"+info.getProfilePhotoAdd());
 
         ((ImageView)forRet.findViewById(R.id.htab_header)).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                changeProfilePhoto();
+                selectProfilePhoto();
             }
         });
 
         return forRet;
     }
 
-    //改变封面图片对应的Result
     @Override
     public void onActivityResult(int requestCode,int b,Intent data){
         Uri tmp=data.getData();
@@ -78,7 +80,6 @@ public class InfoFragment extends Fragment {
                 @Override
                 public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
                     Log.i("cyy uploading pic done","Success");
-
                     Toast.makeText(getContext(), getString(R.string.SuccessUpdateProfilePhoto), Toast.LENGTH_SHORT).show();
                 }
 
@@ -92,7 +93,7 @@ public class InfoFragment extends Fragment {
             Toast.makeText(getContext(),getText(R.string.ErrorUnknowError),Toast.LENGTH_LONG).show();
         }
     }
-    public void changeProfilePhoto(){
+    public void selectProfilePhoto(){
         Intent intent = new Intent();
         intent.setType("image/*");
         intent.setAction(Intent.ACTION_GET_CONTENT);

@@ -93,7 +93,7 @@ public class Login extends AppCompatActivity {
                             Toast.makeText(getApplicationContext(), "登陆成功", Toast.LENGTH_LONG).show();
                             loginStatusKeeper.updateLoginStatus(getApplicationContext());
                             Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-                            UserInfo.initUserInfo(studentNumber.getText().toString(),ct);
+                            //UserInfo.initUserInfo(studentNumber.getText().toString(),ct);
                             startActivity(intent);
                         }
                         else if(message.what == LOGIN_FAILED) {

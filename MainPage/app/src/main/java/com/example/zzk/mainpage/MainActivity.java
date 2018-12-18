@@ -9,7 +9,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 import android.view.Window;
 
-import InfoFragment;
+import com.example.cyy.controller.InfoFragment;
 
 import java.util.ArrayList;
 import java.util.List;
