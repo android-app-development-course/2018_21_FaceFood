@@ -1,6 +1,7 @@
 package com.example.cyy.module;
 
 import android.content.Context;
+import android.net.sip.SipSession;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -23,28 +24,12 @@ import cz.msebera.android.httpclient.Header;
 public class UserInfo {
     static public void initUserInfo(final String id, final Context context)
     {
-        AsyncHttpClient client = new AsyncHttpClient();
-        RequestParams params = new RequestParams();
-        params.put("student_id", id);
-        client.get("http://129.204.49.159/getUserinfo", params, new JsonHttpResponseHandler() {
-                    @Override
-                    public void onSuccess(int statusCode, Header[] headers, JSONObject ret){
-                        // called when response HTTP status is "200 OK"
-                        try {
-                            Log.i("UserInfo","Successfully obaint user info");
-                            me = new UserInfo(ret.getString("nickName"), ret.getString("address"), ret.getString("profilePhotoAdd"), ret.getString("gender"), id);
-                        }catch (Exception e){
-                            Toast.makeText(context,context.getResources().getText(R.string.ErrorCannotGetUserInfo),Toast.LENGTH_LONG);
-                        }
-                    }
-
-                    @Override
-                    public void onFailure(int statusCode, Header[] headers, String res, Throwable t) {
-                        // called when response HTTP status is "4XX" (eg. 401, 403, 404)
-                        Toast.makeText(context,context.getResources().getText(R.string.ErrorCannotGetUserInfo),Toast.LENGTH_LONG);
-                    }
-                }
-        );
+        me=new UserInfo();
+        me.setId(id);
+        me.downdateUserInfo();
+    }
+    static public void logOut(){
+        me=null;
     }
     public boolean updateUserInfo(final Context context){
         if(me==null){
@@ -72,6 +57,34 @@ public class UserInfo {
             }
         });
         return true;
+    }
+    public void downdateUserInfo(){
+        AsyncHttpClient client = new AsyncHttpClient();
+        RequestParams params = new RequestParams();
+        params.put("student_id", id);
+        final UserInfo _this=this;
+        client.get("http://129.204.49.159/getUserinfo", params, new JsonHttpResponseHandler() {
+                    @Override
+                    public void onSuccess(int statusCode, Header[] headers, JSONObject ret){
+                        // called when response HTTP status is "200 OK"
+                        try {
+                            ret=ret.getJSONArray("data").getJSONObject(0);
+                            Log.i("UserInfo","Successfully obaint user info");
+                            _this.setName(ret.getString("nickName"));
+                            _this.setAdd(ret.getString("address"));
+                            _this.setProfilePhotoAdd(ret.getString("profilePhotoAdd"));
+                            _this.setGender(ret.getString("gender"));
+                        }catch (Exception e){
+                            UserInfo.logOut();
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(int statusCode, Header[] headers, String res, Throwable t) {
+                        // called when response HTTP status is "4XX" (eg. 401, 403, 404)
+                    }
+                });
+        return;
     }
     static public UserInfo getUser(){
         return me;
@@ -126,6 +139,15 @@ public class UserInfo {
     public void setGender(Gender gender) {
         this.gender = gender;
     }
+    public void setGender(String gender){
+        Gender myGender=Gender.UNKNOW;
+        if(gender=="男"||gender=="boy"||gender=="male"||gender=="man"){
+            myGender=Gender.MALE;
+        }
+        else if(gender=="女"||gender=="girl"||gender=="female"||gender=="woman"){
+            myGender=Gender.FEMALE;
+        }
+    }
 
     public String getId() {
         return id;
@@ -147,13 +169,9 @@ public class UserInfo {
         this.setAdd(add);
         this.setProfilePhotoAdd(profilePhotoAdd);
         this.setId(id);
-        Gender myGender=Gender.UNKNOW;
-        if(gender=="男"||gender=="boy"||gender=="male"||gender=="man"){
-            myGender=Gender.MALE;
-        }
-        else if(gender=="女"||gender=="girl"||gender=="female"||gender=="woman"){
-            myGender=Gender.FEMALE;
-        }
-        this.setGender(myGender);
+        this.setGender(gender);
+    }
+    private UserInfo(){
+        ;
     }
 }

@@ -106,6 +106,9 @@
     <string name="ErrorCannotGetUserInfo">There\'s a error exiting when trying to get user infomation.</string>
     <string name="ErrorCannotUpdateUserInfo">There\'s a error updating user infomation</string>
     <string name="SuccessUpdateUserInfo">Successfully update user infomation</string>
+    <string name="ErrorCannotUploadProfilePhoto">There\'s a error uploading profile photo</string>
+    <string name="ErrorUnknowError">Unknow Error</string>
+    <string name="SuccessUpdateProfilePhoto">Success updating profile photo!</string>
 
 
 </resources>
