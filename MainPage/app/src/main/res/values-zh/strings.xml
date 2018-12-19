@@ -110,5 +110,17 @@
     <string name="ErrorCannotUploadProfilePhoto">上传相片的时候发生了错误</string>
     <string name="ErrorUnknowError">未知错误</string>
     <string name="SuccessUpdateProfilePhoto">上传相片成功</string>
+    <string name="name">名字</string>
+    <string name="address">住址</string>
+    <string name="gender">性别</string>
+    <string name="ID">学号</string>
+    <string name="confirm">确定</string>
+    <string name="cancel">取消</string>
+    <string name="NoChangeHappen">没发生什么改变</string>
+    <string name="GENDER_MALE">男</string>
+    <string name="GENDER_FEMALE">女</string>
+    <string name="GENDER_UNKNOW">未知</string>
+    <string name="Privacy">隐私信息</string>
+    <string name="Public">公开信息</string>
 </resources>
 

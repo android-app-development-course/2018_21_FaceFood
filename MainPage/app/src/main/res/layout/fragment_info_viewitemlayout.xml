@@ -1,18 +1,51 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
-    android:layout_height="match_parent" android:orientation="horizontal" android:elevation="5dp" android:divider="@color/divider_gray">
-    <TextView
-        android:layout_width="0dp"
-        android:layout_height="match_parent"
-        android:layout_weight="1"
-        android:id="@+id/info_item_desc"
-        android:text="Description"/>
-    <TextView
-        android:layout_width="0dp"
-        android:layout_height="match_parent"
-        android:layout_weight="3"
-        android:id="@+id/info_item_value"
-        android:text="info_item_value"
-        android:textAlignment="center"/>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:divider="@color/divider_gray"
+    android:orientation="vertical">
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="15dp"
+        android:layout_weight="1" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="4"
+        android:background="@color/colorGrey0"
+        android:elevation="10dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/info_item_desc"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:elevation="15dp"
+            android:gravity="center"
+            android:text="Description"
+            android:textSize="18sp" />
+
+        <Button
+            android:id="@+id/info_item_value"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="3"
+            android:elevation="15dp"
+            android:gravity="center"
+            android:textAlignment="center"
+            android:textSize="30sp">
+
+        </Button>
+
+    </LinearLayout>
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="15dp"
+        android:layout_weight="1" />
+
 </LinearLayout>

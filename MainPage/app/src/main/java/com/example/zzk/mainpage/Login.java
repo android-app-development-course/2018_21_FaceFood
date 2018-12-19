@@ -2,6 +2,7 @@ package com.example.zzk.mainpage;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
@@ -125,6 +126,7 @@ public class Login extends AppCompatActivity {
 
                     if(loginStatus.equals("success")) {
                         message.what = LOGIN_SUCCESS;
+                        UserInfo.initUserInfo(id,getApplicationContext(),null);
                     }
                     else if(loginStatus.equals("fail")) {
                         message.what = LOGIN_FAILED;

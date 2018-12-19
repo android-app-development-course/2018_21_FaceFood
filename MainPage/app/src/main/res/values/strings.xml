@@ -1,8 +1,8 @@
 <resources>
     <string name="app_name">FaceFood</string>
-    <string name="home">主页</string>
-    <string name="share">分享</string>
-    <string name="info">个人信息</string>
+    <string name="home">MainPage</string>
+    <string name="share">Share</string>
+    <string name="info">User infomation</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="Info_Fragment">Hello Info fragment</string>
@@ -11,7 +11,7 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
-    <string name="to_the_end">已经到底了</string>
+    <string name="to_the_end">Here\'s botton</string>
     <string name="title_activity_scrolling">ScrollingActivity</string>
     <string name="large_text">
         "Material is the metaphor.\n\n"
@@ -109,6 +109,18 @@
     <string name="ErrorCannotUploadProfilePhoto">There\'s a error uploading profile photo</string>
     <string name="ErrorUnknowError">Unknow Error</string>
     <string name="SuccessUpdateProfilePhoto">Success updating profile photo!</string>
+    <string name="name">name</string>
+    <string name="address">address</string>
+    <string name="gender">gender</string>
+    <string name="ID">ID</string>
+    <string name="confirm">confirm</string>
+    <string name="cancel">cancel</string>
+    <string name="NoChangeHappen">No change happen</string>
+    <string name="GENDER_MALE">male</string>
+    <string name="GENDER_FEMALE">female</string>
+    <string name="GENDER_UNKNOW">unknow</string>
+    <string name="Privacy">Privacy</string>
+    <string name="Public">Public</string>
 
 
 </resources>

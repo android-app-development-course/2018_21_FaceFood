@@ -23,6 +23,9 @@ import cz.msebera.android.httpclient.Header;
 
 //暂时设计成单体类，如果以后需要查看、更改他人信息的话，再进行修改
 public class UserInfo {
+    public enum InfoType{
+        name,id,address,gender,photo
+    };
     static public void initUserInfo(final String id, final Context context, NetDoneListener netDoneListener)
     {
         me=new UserInfo();
@@ -72,13 +75,14 @@ public class UserInfo {
                         // called when response HTTP status is "200 OK"
                         try {
                             ret=ret.getJSONArray("data").getJSONObject(0);
-                            Log.i("UserInfo","Successfully obaint user info");
                             _this.setName(ret.getString("nickName"));
                             _this.setAdd(ret.getString("address"));
                             _this.setProfilePhotoAdd(ret.getString("profilePhotoAdd"));
                             _this.setGender(ret.getString("gender"));
                             if(netDoneListener!=null)
                                 netDoneListener.OnNetDone();
+                            _this.setInitComplete();
+                            Log.i("UserInfo","Successfully obaint user info");
                         }catch (Exception e){
                             UserInfo.logOut();
                         }
@@ -146,14 +150,14 @@ public class UserInfo {
     }
     public void setGender(String gender){
         Gender myGender=Gender.UNKNOW;
-        if(gender=="男"||gender=="boy"||gender=="male"||gender=="man"){
+        if(gender=="男"||gender=="boy"||gender=="male"||gender=="man"||gender==String.valueOf(Gender.MALE.value)){
             myGender=Gender.MALE;
         }
-        else if(gender=="女"||gender=="girl"||gender=="female"||gender=="woman"){
+        else if(gender=="女"||gender=="girl"||gender=="female"||gender=="woman"||gender==String.valueOf(Gender.MALE.value)){
             myGender=Gender.FEMALE;
         }
+        this.gender=myGender;
     }
-
     public String getId() {
         return id;
     }
@@ -167,7 +171,15 @@ public class UserInfo {
     private String profilePhotoAdd;//头像文件的地址
     private Gender gender;
     private String id;
+    private boolean isInit=false;
     static private UserInfo me=null;
+
+    public void setInitComplete(){
+        isInit=true;
+    }
+    public boolean getIsInit(){
+        return isInit;
+    }
 
     private UserInfo(String name,String add,String profilePhotoAdd,String gender,String id){
         this.setName(name);

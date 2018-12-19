@@ -10,6 +10,7 @@ import android.view.MenuItem;
 import android.view.Window;
 
 import com.example.cyy.controller.InfoFragment;
+import com.example.cyy.module.UserInfo;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -41,6 +42,7 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        //UserInfo.initUserInfo("test", getApplicationContext(),null);
         super.onCreate(savedInstanceState);
 
         requestWindowFeature(Window.FEATURE_NO_TITLE);//will hide the title

@@ -7,7 +7,9 @@
     <color name="colorAccent">#D81B60</color>
     <color name="white">#ffffff</color>
     <color name="light_blue_no_image">#e3f2fd</color>
-    <color name="widget_text_background">#A9A9A9</color>
+    <color name="widget_text_background">#a9a9a9</color>
     <color name="text_white">#ffffff</color>
     <color name="divider_gray">#cd646464</color>
+    <color name="colorGrey0">#3da9a9a9</color>
+    <color name="colorGrey1">#9fefebeb</color>
 </resources>

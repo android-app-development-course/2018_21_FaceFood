@@ -1,5 +1,6 @@
 package com.example.cyy.controller;
 
+import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -40,20 +41,16 @@ public class InfoFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        info=UserInfo.getUser();
+
         View forRet = inflater.inflate(R.layout.fragment_info, null);
         viewPager= forRet.findViewById(R.id.htab_viewpager);
         tabLayout=forRet.findViewById(R.id.htab_tabs);
         photo=forRet.findViewById(R.id.htab_header);
 
-        UserInfo.initUserInfo("1", getContext(), new NetDoneListener() {
-            @Override
-            public void OnNetDone() {
-                new ImageViewUrlSetter(photo).set("http://yummmy.cn/"+info.getProfilePhotoAdd());
-            }
-        });
-        info=UserInfo.getUser();
+        new ImageViewUrlSetter(photo).set("http://yummmy.cn/"+info.getProfilePhotoAdd());
 
-        viewPager.setAdapter(new ViewPagerAdapter(getFragmentManager()));
+        viewPager.setAdapter(new ViewPagerAdapter(getFragmentManager(),getContext()));
         tabLayout.setupWithViewPager(viewPager);
 
         ((ImageView)forRet.findViewById(R.id.htab_header)).setOnClickListener(new View.OnClickListener() {
@@ -105,10 +102,10 @@ class ViewPagerAdapter extends FragmentPagerAdapter {
     private final List<Fragment> mFragmentList = new ArrayList<>();
     private final List<String> mFragmentTitleList = new ArrayList<>();
 
-    public ViewPagerAdapter(FragmentManager manager) {
+    public ViewPagerAdapter(FragmentManager manager,Context context) {
         super(manager);
-        mFragmentTitleList.add("公开信息");
-        mFragmentTitleList.add("隐私信息");
+        mFragmentTitleList.add(context.getString(R.string.Public));
+        mFragmentTitleList.add(context.getString(R.string.Privacy));
         mFragmentList.add( new PublicInfoFragment());
         mFragmentList.add(new PrivateInfoFragment());
     }
