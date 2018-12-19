@@ -1,6 +1,0 @@
-Database accountDB;
-
-Table account;
-
-student_number, password_md5, nickname
-varchar(50), varchar(50), varchar(50)
