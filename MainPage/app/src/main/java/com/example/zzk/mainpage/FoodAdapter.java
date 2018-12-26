@@ -1,6 +1,7 @@
 package com.example.zzk.mainpage;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -119,7 +120,7 @@ public class FoodAdapter extends BaseAdapter {
 
                 String description = (String)recommand_food.get(i).get("recommand_food_description");
                 String imagePath = (String) recommand_food.get(i).get("recommand_food_image");
-                imagePath = "http://yummmy.cn/" + imagePath;
+                imagePath = "http://129.204.49.159/" + imagePath;
 
 //                int imageID = (int) recommand_food.get(i).get("recommand_food_image");
 
@@ -134,6 +135,8 @@ public class FoodAdapter extends BaseAdapter {
                     @Override
                     public void onSliderClick(SliderView sliderView) {
                         Toast.makeText(context, "This is slider " + (finalI + 1), Toast.LENGTH_SHORT).show();
+//                        Intent intent = new Intent(context, DetailedActivity.class);
+//                        startActivity(intent);
                     }
                 });
 
@@ -156,7 +159,7 @@ public class FoodAdapter extends BaseAdapter {
             item.foodPlace = convertView.findViewById(R.id.food_place);
 
             String imageURL = (String)data.get(position - 1).get("food_image");
-            imageURL = "http://www.yummmy.cn/" + imageURL;
+            imageURL = "http://129.204.49.159/" + imageURL;
 //
 //            try {
 //                loadImage.get(position - 1);

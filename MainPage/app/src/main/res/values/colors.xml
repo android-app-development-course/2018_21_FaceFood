@@ -5,6 +5,7 @@
     <color name="colorPrimaryLight">#ff262d</color>
     <color name="colorPrimaryLighter">#ff3339</color>
     <color name="colorAccent">#D81B60</color>
+
     <color name="white">#ffffff</color>
     <color name="light_blue_no_image">#e3f2fd</color>
     <color name="widget_text_background">#a9a9a9</color>
@@ -12,4 +13,19 @@
     <color name="divider_gray">#cd646464</color>
     <color name="colorGrey0">#3da9a9a9</color>
     <color name="colorGrey1">#9fefebeb</color>
+
+    <color name="blue">#4086ff</color>
+    <color name="colorBlack">#000000</color>
+
+    <color name="gray">#ff888888</color>
+
+    <color name="beige">#F5F5DC</color><!--米色 -->
+    <color name="ivory">#FFFFF0</color><!--象牙色 -->
+    <color name="blanchedalmond">#FFEBCD</color><!--白杏色 -->
+
+    <color name="whitesmoke">#F5F5F5</color><!--烟白色 -->
+    <color name="green">#008000</color><!--绿色 -->
+    <color name="red">#FF0000</color>
+
+    <color name="tomato">#FF6347</color>
 </resources>

@@ -1,16 +1,94 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:padding="10dp"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ShareActivity">
+    android:orientation="vertical"
+    tools:context=".MainActivity">
 
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="TextView"
-        tools:layout_editor_absoluteX="162dp"
-        tools:layout_editor_absoluteY="245dp" />
-</android.support.constraint.ConstraintLayout>
+        android:orientation="horizontal">
+        <ImageView
+            android:id="@+id/ivBack"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@mipmap/arrow180"/>
+        <TextView
+            android:id="@+id/evRelease"
+            android:layout_gravity="center"
+            android:layout_marginLeft="270dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#19c90c"
+            android:textSize="15sp"
+            android:text="发表"/>
+    </LinearLayout>
+
+    <EditText
+        android:id="@+id/etDynamic"
+        android:layout_width="match_parent"
+        android:layout_height="90dp"
+        android:layout_marginTop="20dp"
+
+        android:hint="发布这一刻的想法...."
+        android:textSize="15sp"
+        android:gravity="top"
+        android:background="@null"/>
+
+
+    <!-- 网格显示图片 行列间距5dp 每列宽度90dp -->
+    <GridView
+        android:id="@+id/imageGridView"
+        android:layout_width="fill_parent"
+        android:layout_height="200dp"
+        android:layout_margin="10dp"
+        android:background="@drawable/gridview1_shape"
+        android:horizontalSpacing="5dp"
+        android:verticalSpacing="5dp"
+        android:numColumns="3"
+        android:columnWidth="90dp"
+        android:stretchMode="columnWidth"
+        android:gravity="center" >
+    </GridView>
+
+    <LinearLayout
+        android:layout_marginTop="50dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <ImageView
+            android:id="@+id/ivLocation"
+            android:layout_width="20sp"
+            android:layout_height="match_parent"
+            android:src="@mipmap/location57"
+            android:layout_marginRight="5dp"/>
+        <TextView
+            android:id="@+id/tvShowPlace"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:gravity="center"
+            android:textSize="17sp"
+            android:textColor="#000000"
+            android:text="请选择饭堂地点："/>
+        <Spinner
+            android:id="@+id/SpSelectPlace"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="60dp"></Spinner>
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/btnRelease"
+        android:textSize="20sp"
+        android:text="发布"
+        android:layout_marginTop="40dp"
+        android:layout_width="match_parent"
+        android:layout_height="55sp" />
+
+    <ImageView
+        android:id="@+id/ig"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+</LinearLayout>

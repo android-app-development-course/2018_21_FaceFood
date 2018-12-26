@@ -1,6 +1,7 @@
 package com.example.zzk.mainpage;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -9,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AbsListView;
 import android.widget.Adapter;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -29,18 +31,11 @@ public class HomeFragment extends Fragment {
 
     private ListView foodList;
     private Adapter foodAdapter;
-//    private List<Map<String, Object>> recommandList;
-//    private List<Map<String, Object>> normalList;
-
     private View view;
-
     private int preLast;
-
     public FoodContentProvider foodContentProvider;
-
     // 0 no, 1 yes
     private int isContainRecommandContent = 1;
-
 
     public HomeFragment() {
         foodContentProvider = new FoodContentProvider();
@@ -60,53 +55,43 @@ public class HomeFragment extends Fragment {
 
         view = inflater.inflate(R.layout.fragment_home, null);
         foodList = view.findViewById(R.id.list_view);
-
         preLast = 0;
-
         foodList.setOnScrollListener(new AbsListView.OnScrollListener() {
             @Override
             public void onScrollStateChanged(AbsListView view, int scrollState) {
-
             }
 
             @Override
             public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
-
                 final int lastItem = firstVisibleItem + visibleItemCount;
-
                 if(lastItem == totalItemCount) {
-
                     if(lastItem != preLast) {
-
                         preLast = lastItem;
-
                         Toast.makeText(getContext(), "加载更多", Toast.LENGTH_SHORT).show();
-
                         fillMoreListView();
                     }
-
                 }
             }
         });
-
+        foodList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent intent = new Intent(getContext(), DetailedActivity.class);
+                startActivity(intent);
+            }
+        });
         view.setVisibility(View.INVISIBLE);
-
         fillListView();
-
         return view;
     }
 
     private void fillListView() {
-
         try {
-
             JSONObject jsonObject = new JSONObject();
             jsonObject.put("normal", "first");
             StringEntity entity = new StringEntity(jsonObject.toString());
-
             AsyncHttpClient asyncHttpClient = new AsyncHttpClient();
-
-            asyncHttpClient.post(getContext(), "http://www.yummmy.cn/firstNormal", entity, "application/json",
+            asyncHttpClient.post(getContext(), "http://129.204.49.159/firstNormal", entity, "application/json",
                     new AsyncHttpResponseHandler() {
                         @Override
                         public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
@@ -128,7 +113,7 @@ public class HomeFragment extends Fragment {
 
                                     AsyncHttpClient asyncHttpClient1 = new AsyncHttpClient();
 
-                                    asyncHttpClient1.post(getContext(), "http://www.yummmy.cn/firstRecommand", entity, "application/json",
+                                    asyncHttpClient1.post(getContext(), "http://129.204.49.159/firstRecommand", entity, "application/json",
                                             new AsyncHttpResponseHandler() {
                                                 @Override
                                                 public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
@@ -187,18 +172,15 @@ public class HomeFragment extends Fragment {
 
     }
 
-
     public void fillMoreListView() {
-
         try {
-
             JSONObject jsonObject = new JSONObject();
             jsonObject.put("normal", "follow");
             StringEntity entity = new StringEntity(jsonObject.toString());
 
             AsyncHttpClient asyncHttpClient = new AsyncHttpClient();
 
-            asyncHttpClient.post(getContext(), "http://www.yummmy.cn/firstNormal", entity, "application/json",
+            asyncHttpClient.post(getContext(), "http://129.204.49.159/firstNormal", entity, "application/json",
                     new AsyncHttpResponseHandler() {
                         @Override
                         public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
@@ -230,7 +212,6 @@ public class HomeFragment extends Fragment {
         }
     }
 
-
     public void notifyDataChanged() {
 
         if(isContainRecommandContent == 1) {
@@ -252,70 +233,4 @@ public class HomeFragment extends Fragment {
 
         notifyDataChanged();
     }
-
-//    public void notifyUpdate() {
-//
-//        List<Map<String, Object>> temp = foodContentProvider.getFollowContent();
-//
-//        for(int i = 0; i < temp.size(); i++) {
-//
-//            normalList.add(temp.get(i));
-//        }
-//        notifyDataChanged();
-//    }
-//
-//    private List<Map<String, Object>> getRecommandContent() {
-//
-//        recommandList = new ArrayList<>();
-//        Map<String, Object> map = new HashMap<String, Object>();
-//        map.put("recommand_food_image", R.drawable.rice2);
-//        map.put("recommand_food_description", "今日推荐");
-//        recommandList.add(map);
-//
-//        Map<String, Object> map1 = new HashMap<String, Object>();
-//        map1.put("recommand_food_image", R.drawable.beaf);
-//        map1.put("recommand_food_description", "不存在的牛肉");
-//        recommandList.add(map1);
-//
-//        Map<String, Object> map2 = new HashMap<String, Object>();
-//        map2.put("recommand_food_image", R.drawable.shousi);
-//        map2.put("recommand_food_description", "不存在的寿司");
-//        recommandList.add(map2);
-//
-//        return recommandList;
-//    }
-//
-//    private List<Map<String, Object>> getData() {
-//        normalList = new ArrayList<>();
-//
-//        for(int i = 0 ; i < 4; i++) {
-//            Map<String, Object> map = new HashMap<String, Object>();
-//
-//            map.put("food_name", "饥饿的食尸鬼");
-//            map.put("food_up", "233");
-//            map.put("food_down", "10");
-//            switch (i) {
-//                case 0:
-//                    map.put("food_image", R.drawable.beaf);
-//                    break;
-//                case 1:
-//                    map.put("food_image", R.drawable.rice);
-//                    break;
-//                case 2:
-//                    map.put("food_image", R.drawable.shousi);
-//                    break;
-//                case 3:
-//                    map.put("food_image", R.drawable.bd);
-//                    break;
-//            }
-//            map.put("food_time", "12/2 10:00");
-//            map.put("food_place", "雍园");
-//
-//            normalList.add(map);
-//        }
-//
-//        return normalList;
-//
-//    }
-
 }

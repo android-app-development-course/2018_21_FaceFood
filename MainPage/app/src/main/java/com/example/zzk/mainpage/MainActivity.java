@@ -54,14 +54,12 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         navigation.setOnNavigationItemSelectedListener(this);
 
         if(savedInstanceState == null) {
-
             prePos = 0;
             fragments = new ArrayList<>();
             fragments.add(new HomeTabFragment());
             fragments.add(new InfoFragment());
         }
         else {
-
             prePos = savedInstanceState.getInt(PRE);
             fragments = new ArrayList<>();
             HomeTabFragment homeFragment = (HomeTabFragment) getSupportFragmentManager().findFragmentByTag(TAGS[0]);
@@ -69,21 +67,17 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
             fragments.add(homeFragment);
             fragments.add(accountFragment);
         }
-
         setDefaultFragment(prePos);
     }
 
     private void setDefaultFragment(int pos){
-
         Fragment fragment = fragments.get(pos);
-
         if(fragment.isAdded()) {
             getSupportFragmentManager().beginTransaction().show(fragment).commit();
         }
         else {
             getSupportFragmentManager().beginTransaction().add(R.id.frameLayout, fragments.get(prePos), TAGS[pos]).commit();
         }
-
     }
 
     @Override
@@ -93,21 +87,15 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
     }
 
     private void switchFragment(int pos) {
-
         Fragment currentFragment = fragments.get(pos);
         Fragment previousFragment = fragments.get(prePos);
-
         getSupportFragmentManager().beginTransaction().hide(previousFragment).commit();
-
         if(currentFragment.isAdded()) {
             getSupportFragmentManager().beginTransaction().show(currentFragment).commit();
         }
         else {
             getSupportFragmentManager().beginTransaction().add(R.id.frameLayout, currentFragment, TAGS[pos]).commit();
         }
-
         prePos = pos;
     }
-
-
 }

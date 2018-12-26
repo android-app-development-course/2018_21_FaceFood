@@ -86,7 +86,7 @@ public class FoodListAdapter extends BaseAdapter {
 //        new LoadNetImageView(item.foodImage).execute((String)data.get(position).get("food_image"));
 
         String imageURL = (String)data.get(position).get("food_image");
-        imageURL = "http://www.yummmy.cn/" + imageURL;
+        imageURL = "http://129.204.49.159/" + imageURL;
 
         Picasso.get().load(imageURL).into(item.foodImage);
 //        item.foodImage.setImageResource(R.drawable.rice);

@@ -28,7 +28,6 @@ public class LoadNetImageView extends AsyncTask<String, Void, Bitmap> {
         catch (Exception E) {
 
         }
-
         return bitmap;
     }
 

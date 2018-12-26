@@ -13,9 +13,6 @@ public class FoodContentProvider {
     List<Map<String, Object>> recommandContent;
     List<Map<String, Object>> normalContent;
 
-//    NetManager recommandNetManager;
-//    NetManager normalNetManager;
-
     public enum ProvideType {
         HOME, STREET, CARE
     }
@@ -27,11 +24,6 @@ public class FoodContentProvider {
     }
 
     public FoodContentProvider() {
-//        recommandNetManager = new NetManager();
-//        normalNetManager = new NetManager();
-//        recommandNetManager.setPath("http://www.yummmy.cn/recommand");
-//        normalNetManager.setPath("http://www.yummmy.cn/normal");
-
         recommandContent = new ArrayList<>();
         normalContent = new ArrayList<>();
     }
@@ -79,44 +71,6 @@ public class FoodContentProvider {
         }
 
     }
-
-//    public void getFirstResponse() {
-//
-//        try {
-//
-//            JSONObject postData = new JSONObject("{ \"getContent\" : \"first\" }");
-//
-//            if(provideType == ProvideType.HOME) {
-//                JSONObject jsonObject = recommandNetManager.postData(postData);
-//                JSONArray jsonArray = jsonObject.getJSONArray("recommandContent");
-//                processRecommandContent(jsonArray);
-//            }
-//
-//            JSONObject jsonObject = normalNetManager.postData(postData);
-//            JSONArray jsonArray = jsonObject.getJSONArray("content");
-//            processNormalContent(jsonArray);
-//        }
-//        catch (Exception e) {
-//
-//        }
-//    }
-//
-//    public void getFollowResponse() {
-//
-//        JSONObject jsonObject;
-//
-//        try {
-//            JSONObject postData = new JSONObject("{ \"getContent\" : \"follow\" }");
-//
-//            jsonObject = normalNetManager.postData(postData);
-//            JSONArray jsonArray = jsonObject.getJSONArray("content");
-//
-//            processNormalContent(jsonArray);
-//        }
-//        catch (Exception e) {
-//
-//        }
-//    }
 
     public List<Map<String, Object>> getRecommandContent() {
 

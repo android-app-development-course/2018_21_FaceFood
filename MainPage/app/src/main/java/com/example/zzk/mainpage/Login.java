@@ -17,8 +17,17 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.cyy.module.UserInfo;
+import com.loopj.android.http.AsyncHttpClient;
+import com.loopj.android.http.AsyncHttpResponseHandler;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
+
+import java.util.List;
+import java.util.Map;
+
+import cz.msebera.android.httpclient.Header;
+import cz.msebera.android.httpclient.entity.StringEntity;
 
 public class Login extends AppCompatActivity {
 
@@ -43,6 +52,7 @@ public class Login extends AppCompatActivity {
         if(loginStatusKeeper.getLoginStatus(getApplicationContext()) == loginStatusKeeper.LOGIN)
         {
             loginStatusKeeper.updateLoginStatus(getApplicationContext());
+            UserInfo.initUserInfo(loginStatusKeeper.getUserID(), getApplicationContext(), null);
             Intent intent = new Intent(getApplicationContext(), MainActivity.class);
             startActivity(intent);
         }
@@ -108,41 +118,52 @@ public class Login extends AppCompatActivity {
 
     }
 
-
     private void login(final String id, final String password) {
+        try {
+            JSONObject jsonObject = new JSONObject();
+            jsonObject.put("account", id);
+            jsonObject.put("md5", password);
+            StringEntity entity = new StringEntity(jsonObject.toString());
 
-        new Thread() {
+            AsyncHttpClient asyncHttpClient = new AsyncHttpClient();
 
-            public void run() {
+            asyncHttpClient.post(getApplicationContext(), "http://129.204.49.159/account", entity, "application/json",
+                    new AsyncHttpResponseHandler() {
+                        @Override
+                        public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
+                            try {
+                                String json = new String(responseBody, "utf-8");
+                                JSONObject jsonObject = new JSONObject(json);
+                                String loginStatus = jsonObject.getString("login");
+                                Message message = new Message();
+                                if(loginStatus.equals("success")) {
+                                    message.what = LOGIN_SUCCESS;
+                                    loginStatusKeeper.saveUserID(getApplicationContext(), id);
 
-                try {
+                                    String nickname = jsonObject.getString("nickname");
+                                    loginStatusKeeper.saveNickname(getApplicationContext(), nickname);
+                                    UserInfo.initUserInfo(id, getApplicationContext(),null);
+                                }
+                                else if(loginStatus.equals("fail")) {
+                                    message.what = LOGIN_FAILED;
+                                }
+                                handler.sendMessage(message);
+                            }
+                            catch (Exception e) {
 
-                    JSONObject jsonObject = jsonManager.getAccountAndMd5(id, password);
-                    JSONObject receiveJsonObject = netManager.postData(jsonObject);
+                            }
+                        }
 
-                    String loginStatus = receiveJsonObject.getString("login");
+                        @Override
+                        public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
 
-                    Message message = new Message();
+                        }
+                    });
 
-                    if(loginStatus.equals("success")) {
-                        message.what = LOGIN_SUCCESS;
-                        UserInfo.initUserInfo(id,getApplicationContext(),null);
-                    }
-                    else if(loginStatus.equals("fail")) {
-                        message.what = LOGIN_FAILED;
-                    }
+        }
+        catch (Exception e) {
 
-                    handler.sendMessage(message);
-                }
-                catch (Exception e) {
-                    Log.i("info", "Exception");
-                }
-
-            }
-
-        }.start();
-
-
+        }
     }
 
 }

@@ -48,9 +48,9 @@ public class PagerAdapter extends FragmentPagerAdapter {
             case 0:
                 return "推荐";
             case 1:
-                return "大街";
-            case 2:
                 return "关注";
+            case 2:
+                return "我的";
             default:
                 return null;
         }

@@ -12,19 +12,14 @@ import android.view.ViewGroup;
 
 public class HomeTabFragment extends Fragment {
 
-//    private List<HomeFragment> homeFragments;
-
     public HomeTabFragment() {
     }
 
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-
         View view = inflater.inflate(R.layout.fragment_home_tab, null);
-
         ViewPager viewPager = view.findViewById(R.id.pager);
         viewPager.setOffscreenPageLimit(3);
         PagerAdapter myPagerAdapter = new PagerAdapter(getFragmentManager(), 3);
-//        homeFragments = myPagerAdapter.getHomeFragments();
 
         viewPager.setAdapter(myPagerAdapter);
         TabLayout tabLayout = view.findViewById(R.id.tablayout);
