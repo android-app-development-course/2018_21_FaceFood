@@ -121,6 +121,8 @@
     <string name="GENDER_UNKNOW">unknow</string>
     <string name="Privacy">Privacy</string>
     <string name="Public">Public</string>
+    <string name="InfoManger">Management</string>
+    <string name="logout">Logout</string>
 
 
 </resources>

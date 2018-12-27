@@ -106,8 +106,10 @@ class ViewPagerAdapter extends FragmentPagerAdapter {
         super(manager);
         mFragmentTitleList.add(context.getString(R.string.Public));
         mFragmentTitleList.add(context.getString(R.string.Privacy));
+        mFragmentTitleList.add(context.getString(R.string.InfoManger));
         mFragmentList.add( new PublicInfoFragment());
         mFragmentList.add(new PrivateInfoFragment());
+        mFragmentList.add(new UserManager());
     }
 
     @Override
