@@ -32,64 +32,111 @@
                 android:orientation="vertical">
 
                 <TextView
-                    android:id="@+id/textView1"
+                    android:id="@+id/detailedUsername"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="一个普通的用户名"
                     android:textStyle="bold" />
 
                 <TextView
 
-                    android:id="@+id/textView22"
+                    android:id="@+id/detailedDateTime"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-
-                    android:text="2018/12/3 13:08" />
+                    android:layout_height="wrap_content" />
 
                 <TextView
-                    android:id="@+id/textView33"
+                    android:id="@+id/detailedLocation"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="陶园" />
+                    android:layout_height="wrap_content" />
+
             </LinearLayout>
-
-
 
         </LinearLayout>
 
         <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="10dp" />
 
-            android:id="@+id/textView"
+        <TextView
+            android:id="@+id/detailedContent"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="雍园可真难吃，还是陶园好吃点,雍园可真难吃，还是陶园好吃点,雍园可真难吃，还是陶园好吃点,雍园可真难吃，还是陶园好吃点,雍园可真难吃，还是陶园好吃点,"
-            android:layout_gravity="center_horizontal"
+            android:layout_gravity="left"
             android:textStyle="bold" />
 
-        <ImageView
-
-            android:id="@+id/imageView"
+        <TextView
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:srcCompat="@drawable/head"
-            android:layout_gravity="center_horizontal" />
+            android:layout_height="20dp" />
 
 
         <ImageView
-
-            android:id="@+id/imageView2"
+            android:id="@+id/detailedImageItem0"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:srcCompat="@drawable/head"
             android:layout_gravity="center_horizontal" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="10dp" />
         <ImageView
-
-            android:id="@+id/imageView3"
+            android:id="@+id/detailedImageItem1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:srcCompat="@drawable/head"
             android:layout_gravity="center_horizontal" />
-
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="10dp" />
+        <ImageView
+            android:id="@+id/detailedImageItem2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="10dp" />
+        <ImageView
+            android:id="@+id/detailedImageItem3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="10dp" />
+        <ImageView
+            android:id="@+id/detailedImageItem4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="10dp" />
+        <ImageView
+            android:id="@+id/detailedImageItem5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="10dp" />
+        <ImageView
+            android:id="@+id/detailedImageItem6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="10dp" />
+        <ImageView
+            android:id="@+id/detailedImageItem7"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="10dp" />
+        <ImageView
+            android:id="@+id/detailedImageItem8"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal" />
 
     </LinearLayout>
 

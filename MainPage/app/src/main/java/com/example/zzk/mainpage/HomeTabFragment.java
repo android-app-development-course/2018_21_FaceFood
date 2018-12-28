@@ -19,7 +19,7 @@ public class HomeTabFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_home_tab, null);
         ViewPager viewPager = view.findViewById(R.id.pager);
         viewPager.setOffscreenPageLimit(3);
-        PagerAdapter myPagerAdapter = new PagerAdapter(getFragmentManager(), 3);
+        PagerAdapter myPagerAdapter = new PagerAdapter(getFragmentManager());
 
         viewPager.setAdapter(myPagerAdapter);
         TabLayout tabLayout = view.findViewById(R.id.tablayout);

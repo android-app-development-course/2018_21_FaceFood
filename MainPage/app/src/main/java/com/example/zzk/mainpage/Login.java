@@ -35,8 +35,6 @@ public class Login extends AppCompatActivity {
     private EditText password;
     private Button loginButton;
     private TextView createAccount;
-    private NetManager netManager;
-    private JsonManager jsonManager;
     private Handler handler;
     private LoginStatusKeeper loginStatusKeeper;
 
@@ -84,10 +82,6 @@ public class Login extends AppCompatActivity {
             }
         });
 
-        netManager = new NetManager();
-        jsonManager = new JsonManager();
-
-        netManager.setPath("http://yummmy.cn/account");
         final Context ct = getApplicationContext();
         new Thread(new Runnable() {
             @Override

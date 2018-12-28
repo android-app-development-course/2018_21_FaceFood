@@ -1,7 +1,8 @@
 package com.example.zzk.mainpage;
 
-
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -10,7 +11,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AbsListView;
-import android.widget.Adapter;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
@@ -29,16 +29,15 @@ import java.util.Map;
 import cz.msebera.android.httpclient.Header;
 import cz.msebera.android.httpclient.entity.StringEntity;
 
-public class HomeFragment extends Fragment {
+public class MineFragment extends Fragment {
     private View view;
     private ListView foodListView;
     private SwipeRefreshLayout swipeRefreshLayout;
-    private FoodAdapter foodAdapter;
+    private FoodListAdapter foodAdapter;
     private int preLast; // use for check if reach to the bottom
-    private List<Map<String, Object>> recommendItems;
     private List<Map<String, Object>> normalItems;
 
-    public HomeFragment() {
+    public MineFragment() {
     }
 
     @Nullable
@@ -48,10 +47,8 @@ public class HomeFragment extends Fragment {
         view.setVisibility(View.INVISIBLE);
         initView();
 
-        recommendItems = new ArrayList<>();
         normalItems = new ArrayList<>();
-        getRecommendItems();
-//        getNormalItems();
+        getNormalItems();
 
         return view;
     }
@@ -80,12 +77,11 @@ public class HomeFragment extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent intent = new Intent(getContext(), DetailedActivity.class);
-                intent.putExtra("username", (String) normalItems.get(position - 1).get("food_name"));
-                intent.putExtra("date_time", (String) normalItems.get(position - 1).get("food_time"));
-                intent.putExtra("location", (String) normalItems.get(position - 1).get("food_place"));
-                intent.putExtra("content", (String) normalItems.get(position - 1).get("content"));
-                intent.putExtra("images", (String) normalItems.get(position - 1).get("images"));
-                intent.putExtra("id", (String) normalItems.get(position - 1).get("id"));
+                intent.putExtra("username", (String) normalItems.get(position).get("food_name"));
+                intent.putExtra("date_time", (String) normalItems.get(position).get("food_time"));
+                intent.putExtra("location", (String) normalItems.get(position).get("food_place"));
+                intent.putExtra("content", (String) normalItems.get(position).get("content"));
+                intent.putExtra("images", (String) normalItems.get(position).get("images"));
                 startActivity(intent);
             }
         });
@@ -100,52 +96,16 @@ public class HomeFragment extends Fragment {
         });
     }
 
-    private void getRecommendItems() {
-        try {
-            JSONObject jsonObject = new JSONObject();
-            jsonObject.put("nothing", "nothing");
-            StringEntity entity = new StringEntity(jsonObject.toString());
-            AsyncHttpClient asyncHttpClient = new AsyncHttpClient();
-            asyncHttpClient.post(getContext(), "http://129.204.49.159/recommend", entity, "application/json",
-                    new AsyncHttpResponseHandler() {
-                        @Override
-                        public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
-                            try {
-                                String json = new String(responseBody, "utf-8");
-                                JSONObject response = new JSONObject(json);
-                                JSONArray recommendJsonArray = response.getJSONArray("recommend");
-                                for(int i = 0; i < recommendJsonArray.length(); i++) {
-                                    Map<String, Object> map = new HashMap<>();
-                                    JSONObject jsonObject = (JSONObject)recommendJsonArray.get(i);
-                                    map.put("recommend_food_image", jsonObject.getString("image_path"));
-                                    map.put("recommend_food_description", jsonObject.getString("image_description"));
-                                    recommendItems.add(map);
-                                }
-                            }
-                            catch (Exception e) {
-                                e.printStackTrace();
-                            }
-                            getNormalItems();
-                        }
-
-                        @Override
-                        public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
-                            Toast.makeText(getContext(), "无法连接网络", Toast.LENGTH_SHORT).show();
-                        }
-                    });
-        }
-        catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
     private void getNormalItems() {
         try {
+            SharedPreferences sharedPreferences = getContext().getSharedPreferences("loginStatus", Context.MODE_PRIVATE);
+            String username = sharedPreferences.getString("nickname", "undefined");
             JSONObject jsonObject = new JSONObject();
             jsonObject.put("offset", normalItems.size());
-            StringEntity entity = new StringEntity(jsonObject.toString());
+            jsonObject.put("username", username);
+            StringEntity entity = new StringEntity(jsonObject.toString(), "UTF-8");
             AsyncHttpClient asyncHttpClient = new AsyncHttpClient();
-            asyncHttpClient.post(getContext(), "http://129.204.49.159/normal", entity, "application/json",
+            asyncHttpClient.post(getContext(), "http://129.204.49.159/myNormal", entity, "application/json",
                     new AsyncHttpResponseHandler() {
                         @Override
                         public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
@@ -170,17 +130,14 @@ public class HomeFragment extends Fragment {
                                         normalItems.add(map);
                                     }
                                 }
-                                else {
-                                    Toast.makeText(getContext(), "没有更多了", Toast.LENGTH_SHORT).show();
-                                }
                             }
                             catch (Exception e) {
                                 e.printStackTrace();
                             }
 
-                            // --- 第一次初始化adapter，后来的就通知adapter发生了变化 ---
+                            // --- 第一次初始化adapter，后来的就通知adapter发生了变化
                             if(foodAdapter == null) {
-                                foodAdapter = new FoodAdapter(getActivity(), normalItems, recommendItems);
+                                foodAdapter = new FoodListAdapter(getActivity(), normalItems);
                                 foodListView.setAdapter(foodAdapter);
                                 view.setVisibility(View.VISIBLE);
                             }

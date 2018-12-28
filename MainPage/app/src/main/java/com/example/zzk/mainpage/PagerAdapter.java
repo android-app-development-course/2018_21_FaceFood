@@ -9,30 +9,17 @@ import java.util.List;
 
 public class PagerAdapter extends FragmentPagerAdapter {
 
-    private int tabsNumber;
-    private List<HomeFragment> homeFragments;
-
-    public PagerAdapter(FragmentManager fm, int tabsNumber) {
+    public PagerAdapter(FragmentManager fm) {
         super(fm);
-        this.tabsNumber = tabsNumber;
-        homeFragments = new ArrayList<>();
     }
 
     @Override
     public Fragment getItem(int Position) {
-        if (Position < 3) {
-            HomeFragment homeFragment = new HomeFragment();
-
-            if(Position == 0) {
-                homeFragment.setIsContainRecommandContent(1);
-                homeFragment.setFoodContentProvideType(FoodContentProvider.ProvideType.HOME);
-            }
-            else {
-                homeFragment.setIsContainRecommandContent(0);
-                homeFragment.setFoodContentProvideType(FoodContentProvider.ProvideType.STREET);
-            }
-            homeFragments.add(homeFragment);
-            return homeFragment;
+        if (Position == 0) {
+            return new HomeFragment();
+        }
+        else if(Position == 1 || Position == 2) {
+            return new MineFragment();
         }
         return null;
     }
@@ -54,9 +41,5 @@ public class PagerAdapter extends FragmentPagerAdapter {
             default:
                 return null;
         }
-    }
-
-    public List<HomeFragment> getHomeFragments() {
-        return homeFragments;
     }
 }

@@ -1,41 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<ScrollView
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-         android:padding="5dp"
+          android:layout_width="match_parent"
+          android:layout_height="match_parent"
+          android:padding="5dp">
 
-        >
-        <LinearLayout
-            android:id="@+id/comment_layout_main"
+        <ListView
+            android:id="@+id/comment_list"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            >
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Fragment2"/>
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Fragment2"/>
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Fragment2"
-                    />
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Fragment2"
-                    />
+            android:layout_height="match_parent">
+        </ListView>
 
-        </LinearLayout>
-
-
-</ScrollView>
+</LinearLayout>
 
 
 

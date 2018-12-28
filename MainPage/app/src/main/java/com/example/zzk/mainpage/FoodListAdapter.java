@@ -21,28 +21,10 @@ public class FoodListAdapter extends BaseAdapter {
     private Context context;
 
     public FoodListAdapter(Context context, List<Map<String, Object>> data) {
-
         this.context = context;
-//        this.data = data;
+        this.data = data;
         this.layoutInflater = LayoutInflater.from(context);
-
-        this.data = new ArrayList<>();
-        for(int i = 0; i < data.size(); i++) {
-            this.data.add(data.get(i));
-        }
     }
-
-
-    public void addMoreDate(List<Map<String, Object>> updateContent) {
-
-        for(int i = 0; i < updateContent.size(); i++) {
-
-            data.add(updateContent.get(i));
-
-        }
-
-    }
-
 
     @Override
     public Object getItem(int position) {
@@ -70,26 +52,18 @@ public class FoodListAdapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-
         FoodItem item = new FoodItem();
-
         convertView = layoutInflater.inflate(R.layout.food_item, null);
-
         item.foodImage = convertView.findViewById(R.id.food_image);
         item.foodName = convertView.findViewById(R.id.food_name);
         item.foodUp = convertView.findViewById(R.id.food_up);
         item.foodDown = convertView.findViewById(R.id.food_down);
         item.foodTime = convertView.findViewById(R.id.food_time);
         item.foodPlace = convertView.findViewById(R.id.food_place);
-
-//        item.foodImage.setImageResource((Integer) data.get(position).get("food_image"));
-//        new LoadNetImageView(item.foodImage).execute((String)data.get(position).get("food_image"));
-
         String imageURL = (String)data.get(position).get("food_image");
         imageURL = "http://129.204.49.159/" + imageURL;
-
         Picasso.get().load(imageURL).into(item.foodImage);
-//        item.foodImage.setImageResource(R.drawable.rice);
+
         item.foodUp.setText((String) data.get(position).get("food_up"));
         item.foodDown.setText((String) data.get(position).get("food_down"));
         item.foodName.setText((String) data.get(position).get("food_name"));
