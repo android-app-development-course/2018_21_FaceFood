@@ -2,6 +2,7 @@ package com.example.cyy.controller;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -44,6 +45,7 @@ public class InfoFragment extends Fragment {
         info=UserInfo.getUser();
 
         View forRet = inflater.inflate(R.layout.fragment_info, null);
+
         viewPager= forRet.findViewById(R.id.htab_viewpager);
         tabLayout=forRet.findViewById(R.id.htab_tabs);
         photo=forRet.findViewById(R.id.htab_header);
@@ -59,10 +61,11 @@ public class InfoFragment extends Fragment {
                 selectProfilePhoto();
             }
         });
-
         return forRet;
     }
 
+
+    //上传图片
     @Override
     public void onActivityResult(int requestCode,int b,Intent data){
         Uri tmp=data.getData();
@@ -106,8 +109,10 @@ class ViewPagerAdapter extends FragmentPagerAdapter {
         super(manager);
         mFragmentTitleList.add(context.getString(R.string.Public));
         mFragmentTitleList.add(context.getString(R.string.Privacy));
+        mFragmentTitleList.add(context.getString(R.string.InfoManger));
         mFragmentList.add( new PublicInfoFragment());
         mFragmentList.add(new PrivateInfoFragment());
+        mFragmentList.add(new UserManager());
     }
 
     @Override
