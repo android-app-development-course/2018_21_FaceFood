@@ -123,6 +123,7 @@
     <string name="Public">Public</string>
     <string name="InfoManger">Management</string>
     <string name="logout">Logout</string>
+    <string name="wait">Please wait for moment,</string>
 
 
 </resources>
