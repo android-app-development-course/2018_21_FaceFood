@@ -16,6 +16,10 @@
 
 # 安卓客户端效果图
 
+## 图标
+
+![](image/icon.png)
+
 ## 登录注册
 
 ![登录](image/login.jpg)
