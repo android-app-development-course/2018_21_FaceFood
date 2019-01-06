@@ -18,7 +18,7 @@
 
 ## 图标
 
-![](image/icon.png | width)
+![](image/icon.png)
 
 ## 登录注册
 
