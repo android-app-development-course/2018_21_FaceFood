@@ -13,9 +13,9 @@ import com.squareup.picasso.Picasso;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import com.example.cyy.util.BackEnd;
 
 public class FoodListAdapter extends BaseAdapter {
-
     private List<Map<String, Object>> data;
     private LayoutInflater layoutInflater;
     private Context context;
@@ -61,7 +61,7 @@ public class FoodListAdapter extends BaseAdapter {
         item.foodTime = convertView.findViewById(R.id.food_time);
         item.foodPlace = convertView.findViewById(R.id.food_place);
         String imageURL = (String)data.get(position).get("food_image");
-        imageURL = "http://129.204.49.159/" + imageURL;
+        imageURL = BackEnd.ip+"/" + imageURL;
         Picasso.get().load(imageURL).into(item.foodImage);
 
         item.foodUp.setText((String) data.get(position).get("food_up"));

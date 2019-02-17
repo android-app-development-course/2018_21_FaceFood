@@ -21,6 +21,7 @@ import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.widget.Toast;
 
+import com.example.cyy.util.BackEnd;
 import com.example.zzk.mainpage.CommentDialog;
 import com.example.zzk.mainpage.MyFragmentPagerAdapter;
 import com.loopj.android.http.AsyncHttpClient;
@@ -148,7 +149,7 @@ public class DetailedActivity extends AppCompatActivity implements CommentDialog
             jsonObject.put("userID", sharedPreferences.getString("userID", ""));
             StringEntity entity = new StringEntity(jsonObject.toString());
             AsyncHttpClient asyncHttpClient = new AsyncHttpClient();
-            asyncHttpClient.post(DetailedActivity.this, "http://129.204.49.159/getUpDown", entity, "application/json",
+            asyncHttpClient.post(DetailedActivity.this, BackEnd.ip+"/getUpDown", entity, "application/json",
                     new AsyncHttpResponseHandler() {
                         @Override
                         public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
@@ -205,7 +206,7 @@ public class DetailedActivity extends AppCompatActivity implements CommentDialog
             jsonObject.put("commentContent", commentContent);
             StringEntity entity = new StringEntity(jsonObject.toString(), "UTF-8");
             AsyncHttpClient asyncHttpClient = new AsyncHttpClient();
-            asyncHttpClient.post(DetailedActivity.this, "http://129.204.49.159/postComment", entity, "application/json",
+            asyncHttpClient.post(DetailedActivity.this, BackEnd.ip+"/postComment", entity, "application/json",
                     new AsyncHttpResponseHandler() {
                         @Override
                         public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
@@ -237,7 +238,7 @@ public class DetailedActivity extends AppCompatActivity implements CommentDialog
             jsonObject.put("normalID", detailedInfo.get("id"));
             StringEntity entity = new StringEntity(jsonObject.toString());
             AsyncHttpClient asyncHttpClient = new AsyncHttpClient();
-            asyncHttpClient.post(DetailedActivity.this, "http://129.204.49.159/getComment", entity, "application/json",
+            asyncHttpClient.post(DetailedActivity.this, BackEnd.ip+"/getComment", entity, "application/json",
                     new AsyncHttpResponseHandler() {
                         @Override
                         public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
@@ -309,7 +310,7 @@ public class DetailedActivity extends AppCompatActivity implements CommentDialog
             isFirst = "no";
             StringEntity entity = new StringEntity(jsonObject.toString());
             AsyncHttpClient asyncHttpClient = new AsyncHttpClient();
-            asyncHttpClient.post(DetailedActivity.this, "http://129.204.49.159/postUpDown", entity, "application/json",
+            asyncHttpClient.post(DetailedActivity.this, BackEnd.ip+"/postUpDown", entity, "application/json",
                     new AsyncHttpResponseHandler() {
                         @Override
                         public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {

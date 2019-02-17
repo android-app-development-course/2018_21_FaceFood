@@ -63,6 +63,7 @@ import cz.msebera.android.httpclient.entity.ByteArrayEntity;
 import cz.msebera.android.httpclient.message.BasicHeader;
 import cz.msebera.android.httpclient.protocol.HTTP;
 import id.zelory.compressor.Compressor;
+import com.example.cyy.util.BackEnd;
 
 public class ShareActivity extends AppCompatActivity {
 
@@ -368,7 +369,7 @@ public class ShareActivity extends AppCompatActivity {
         RequestParams params = new RequestParams();
         params.put("student_number",userName);
         params.put("file",is,bmpName);
-        client.post("http://yummmy.cn/upload", params, new AsyncHttpResponseHandler() {
+        client.post(BackEnd.ip+"/upload", params, new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
                 Log.i("uploadImage","succeed");
@@ -416,7 +417,7 @@ public class ShareActivity extends AppCompatActivity {
             e.printStackTrace();
         }
         AsyncHttpClient client = new AsyncHttpClient();
-        client.post(ShareActivity.this, "http://129.204.49.159/postNormal", entity, "application/json",
+        client.post(ShareActivity.this, BackEnd.ip+"/postNormal", entity, "application/json",
                 new AsyncHttpResponseHandler() {
                     @Override
                     public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {

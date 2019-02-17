@@ -18,6 +18,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import com.example.cyy.util.BackEnd;
+
 public class FoodAdapter extends BaseAdapter {
     private List<Map<String, Object>> recommend_food;
     private List<Map<String, Object>> data;
@@ -86,7 +88,7 @@ public class FoodAdapter extends BaseAdapter {
                 SliderView sliderView = new SliderView(context);
                 String description = (String)recommend_food.get(i).get("recommend_food_description");
                 String imagePath = (String) recommend_food.get(i).get("recommend_food_image");
-                imagePath = "http://129.204.49.159/" + imagePath;
+                imagePath = BackEnd.ip+"/" + imagePath;
                 sliderView.setImageUrl(imagePath);
                 sliderView.setDescription(description);
                 sliderView.setImageScaleType(ImageView.ScaleType.CENTER_CROP);
@@ -112,7 +114,7 @@ public class FoodAdapter extends BaseAdapter {
             item.foodPlace = convertView.findViewById(R.id.food_place);
 
             String imageURL = (String)data.get(position - 1).get("food_image");
-            imageURL = "http://129.204.49.159/" + imageURL;
+            imageURL = BackEnd.ip+"/" + imageURL;
             Picasso.get().load(imageURL).into(item.foodImage);
             item.foodUp.setText((String) data.get(position - 1).get("food_up"));
             item.foodDown.setText((String) data.get(position - 1).get("food_down"));

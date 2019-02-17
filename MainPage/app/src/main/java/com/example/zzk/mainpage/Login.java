@@ -28,6 +28,7 @@ import java.util.Map;
 
 import cz.msebera.android.httpclient.Header;
 import cz.msebera.android.httpclient.entity.StringEntity;
+import com.example.cyy.util.BackEnd;
 
 public class Login extends AppCompatActivity {
 
@@ -121,7 +122,7 @@ public class Login extends AppCompatActivity {
 
             AsyncHttpClient asyncHttpClient = new AsyncHttpClient();
 
-            asyncHttpClient.post(getApplicationContext(), "http://129.204.49.159/account", entity, "application/json",
+            asyncHttpClient.post(getApplicationContext(), BackEnd.ip+"/account", entity, "application/json",
                     new AsyncHttpResponseHandler() {
                         @Override
                         public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {

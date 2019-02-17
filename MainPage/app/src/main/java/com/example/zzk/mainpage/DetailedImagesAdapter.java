@@ -6,6 +6,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
+
+import com.example.cyy.util.BackEnd;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -47,7 +49,7 @@ public class DetailedImagesAdapter extends BaseAdapter {
         convertView = layoutInflater.inflate(R.layout.detailed_images_item, null);
         ImageView imageView = convertView.findViewById(R.id.detailedImages_item);
         String imageURL = imageURLs.get(position);
-        imageURL = "http://129.204.49.159/image/" + imageURL;
+        imageURL = BackEnd.ip+"/image/" + imageURL;
         Picasso.get().load(imageURL).into(imageView);
         return imageView;
     }

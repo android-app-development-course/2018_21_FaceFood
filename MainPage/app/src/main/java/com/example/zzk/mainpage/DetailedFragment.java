@@ -12,6 +12,7 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.example.cyy.util.BackEnd;
 import com.squareup.picasso.Picasso;
 
 import org.json.JSONArray;
@@ -48,7 +49,7 @@ public class DetailedFragment extends Fragment{
             JSONArray jsonArray = new JSONArray((String) detailedInfo.get("images"));
             for(int i = 0; i < jsonArray.length(); i++) {
                 String imageURL = jsonArray.getString(i);
-                imageURL = "http://129.204.49.159/image/" + imageURL;
+                imageURL = BackEnd.ip+"/image/" + imageURL;
                 Picasso.get().load(imageURL).into(imageViews[i]);
             }
         }

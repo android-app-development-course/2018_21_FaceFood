@@ -31,6 +31,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import cz.msebera.android.httpclient.Header;
+import com.example.cyy.util.BackEnd;
 
 public class InfoFragment extends Fragment {
     UserInfo info=null;
@@ -50,7 +51,7 @@ public class InfoFragment extends Fragment {
         tabLayout=forRet.findViewById(R.id.htab_tabs);
         photo=forRet.findViewById(R.id.htab_header);
 
-        new ImageViewUrlSetter(photo).set("http://yummmy.cn/"+info.getProfilePhotoAdd());
+        new ImageViewUrlSetter(photo).set(BackEnd.ip+"/"+info.getProfilePhotoAdd());
 
         viewPager.setAdapter(new ViewPagerAdapter(getFragmentManager(),getContext()));
         tabLayout.setupWithViewPager(viewPager);
@@ -76,7 +77,7 @@ public class InfoFragment extends Fragment {
             params.put("student_number",info.getId());
             String newPhotoName = info.getId()+"ProPhoto.jpg";
             params.put("file",picSelected,newPhotoName);
-            client.post("http://yummmy.cn/upload", params, new AsyncHttpResponseHandler() {
+            client.post(BackEnd.ip+"/upload", params, new AsyncHttpResponseHandler() {
                 @Override
                 public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
                     Log.i("cyy uploading pic done","Success");

@@ -28,6 +28,7 @@ import java.util.Map;
 
 import cz.msebera.android.httpclient.Header;
 import cz.msebera.android.httpclient.entity.StringEntity;
+import com.example.cyy.util.BackEnd;
 
 public class MineFragment extends Fragment {
     private View view;
@@ -105,7 +106,7 @@ public class MineFragment extends Fragment {
             jsonObject.put("username", username);
             StringEntity entity = new StringEntity(jsonObject.toString(), "UTF-8");
             AsyncHttpClient asyncHttpClient = new AsyncHttpClient();
-            asyncHttpClient.post(getContext(), "http://129.204.49.159/myNormal", entity, "application/json",
+            asyncHttpClient.post(getContext(), BackEnd.ip+"/myNormal", entity, "application/json",
                     new AsyncHttpResponseHandler() {
                         @Override
                         public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {

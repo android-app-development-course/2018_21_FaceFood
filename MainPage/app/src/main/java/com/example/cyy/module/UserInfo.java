@@ -5,6 +5,7 @@ import android.net.sip.SipSession;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.example.cyy.util.BackEnd;
 import com.example.cyy.util.NetDoneListener;
 import com.example.zzk.mainpage.JsonManager;
 import com.example.zzk.mainpage.NetManager;
@@ -49,7 +50,7 @@ public class UserInfo {
             params.put("gender",String.valueOf(gender.getValue()));
         if(this.add!=null)
             params.put("address",this.add);
-        client.get("http://129.204.49.159/setUserinfo", params, new JsonHttpResponseHandler() {
+        client.get(BackEnd.ip+"/setUserinfo", params, new JsonHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject ret){
                 // called when response HTTP status is "200 OK"
@@ -69,7 +70,7 @@ public class UserInfo {
         RequestParams params = new RequestParams();
         params.put("student_id", id);
         final UserInfo _this=this;
-        client.get("http://129.204.49.159/getUserinfo", params, new JsonHttpResponseHandler() {
+        client.get(BackEnd.ip+"/getUserinfo", params, new JsonHttpResponseHandler() {
                     @Override
                     public void onSuccess(int statusCode, Header[] headers, JSONObject ret){
                         // called when response HTTP status is "200 OK"

@@ -28,6 +28,7 @@ import java.util.Map;
 
 import cz.msebera.android.httpclient.Header;
 import cz.msebera.android.httpclient.entity.StringEntity;
+import com.example.cyy.util.BackEnd;
 
 public class HomeFragment extends Fragment {
     private View view;
@@ -106,7 +107,7 @@ public class HomeFragment extends Fragment {
             jsonObject.put("nothing", "nothing");
             StringEntity entity = new StringEntity(jsonObject.toString());
             AsyncHttpClient asyncHttpClient = new AsyncHttpClient();
-            asyncHttpClient.post(getContext(), "http://129.204.49.159/recommend", entity, "application/json",
+            asyncHttpClient.post(getContext(), BackEnd.ip+"/recommend", entity, "application/json",
                     new AsyncHttpResponseHandler() {
                         @Override
                         public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
@@ -145,7 +146,7 @@ public class HomeFragment extends Fragment {
             jsonObject.put("offset", normalItems.size());
             StringEntity entity = new StringEntity(jsonObject.toString());
             AsyncHttpClient asyncHttpClient = new AsyncHttpClient();
-            asyncHttpClient.post(getContext(), "http://129.204.49.159/normal", entity, "application/json",
+            asyncHttpClient.post(getContext(), BackEnd.ip+"/normal", entity, "application/json",
                     new AsyncHttpResponseHandler() {
                         @Override
                         public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {

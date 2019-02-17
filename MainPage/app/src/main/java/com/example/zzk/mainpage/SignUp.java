@@ -13,6 +13,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import org.json.JSONObject;
+import com.example.cyy.util.BackEnd;
 
 public class SignUp extends AppCompatActivity {
 
@@ -82,7 +83,7 @@ public class SignUp extends AppCompatActivity {
         netManager = new NetManager();
         jsonManager = new JsonManager();
 
-        netManager.setPath("http://yummmy.cn/createAccount");
+        netManager.setPath(BackEnd.ip+"/createAccount");
     }
 
     private void signup(final String nickname, final String student_number, final String password) {
