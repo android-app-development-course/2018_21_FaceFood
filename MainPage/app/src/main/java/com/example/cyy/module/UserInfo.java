@@ -11,6 +11,7 @@ import com.example.zzk.mainpage.JsonManager;
 import com.example.zzk.mainpage.NetManager;
 import com.example.zzk.mainpage.R;
 import com.loopj.android.http.AsyncHttpClient;
+import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
 import com.loopj.android.http.TextHttpResponseHandler;
 import com.loopj.android.http.JsonHttpResponseHandler;
@@ -50,15 +51,15 @@ public class UserInfo {
             params.put("gender",String.valueOf(gender.getValue()));
         if(this.add!=null)
             params.put("address",this.add);
-        client.get(BackEnd.ip+"/setUserinfo", params, new JsonHttpResponseHandler() {
+        client.get(BackEnd.ip+"/setUserinfo", params, new AsyncHttpResponseHandler() {
             @Override
-            public void onSuccess(int statusCode, Header[] headers, JSONObject ret){
+            public void onSuccess(int statusCode, Header[] headers, byte[] response){
                 // called when response HTTP status is "200 OK"
                 Toast.makeText(context,context.getResources().getText(R.string.SuccessUpdateUserInfo),Toast.LENGTH_LONG);
             }
 
             @Override
-            public void onFailure(int statusCode, Header[] headers, String res, Throwable t) {
+            public void onFailure(int statusCode, Header[] headers, byte[] res, Throwable t) {
                 // called when response HTTP status is "4XX" (eg. 401, 403, 404)
                 Toast.makeText(context,context.getResources().getText(R.string.ErrorCannotUpdateUserInfo),Toast.LENGTH_LONG);
             }
@@ -170,7 +171,7 @@ public class UserInfo {
     private String name;
     private String add;
     private String profilePhotoAdd;//头像文件的地址
-    private Gender gender;
+    private Gender gender=Gender.UNKNOW;
     private String id;
     private boolean isInit=false;
     static private UserInfo me=null;

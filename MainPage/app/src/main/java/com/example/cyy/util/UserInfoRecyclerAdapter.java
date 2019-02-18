@@ -146,7 +146,7 @@ public class UserInfoRecyclerAdapter extends RecyclerView.Adapter<UserInfoRecycl
         UserInfoRecyclerAdapter.InfoItem forRet = new UserInfoRecyclerAdapter.InfoItem(
                 name, deValue, new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
+            public void onClick(final View v) {
                 final TextView from = (TextView)v;
                 AlertDialog.Builder builder = new AlertDialog.Builder(context);
                 builder.setTitle(name);
@@ -165,9 +165,11 @@ public class UserInfoRecyclerAdapter extends RecyclerView.Adapter<UserInfoRecycl
                         switch (type){
                             case address:
                                 info.setAdd(newValue);
+                                ((TextView) v).setText(newValue);
                                 break;
                             case name:
                                 info.setName(newValue);
+                                ((TextView) v).setText(newValue);
                                 break;
                         }
                         info.updateUserInfo(context);
