@@ -91,6 +91,7 @@ public class HomeFragment extends Fragment {
                 intent.putExtra("content", (String) normalItems.get(position - 1).get("content"));
                 intent.putExtra("images", (String) normalItems.get(position - 1).get("images"));
                 intent.putExtra("id", (String) normalItems.get(position - 1).get("id"));
+                intent.putExtra("userID",(String)normalItems.get(position-1).get("userID"));
                 startActivity(intent);
             }
         });
@@ -172,6 +173,8 @@ public class HomeFragment extends Fragment {
                                         map.put("food_down", jsonObject.getString("downdown"));
                                         map.put("content", jsonObject.getString("content"));
                                         map.put("images", jsonObject.getString("images"));
+                                        String id = jsonObject.getString("userID");
+                                        map.put("userID",jsonObject.getString("userID"));
                                         normalItems.add(map);
                                     }
                                 }

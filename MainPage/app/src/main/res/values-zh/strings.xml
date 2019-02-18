@@ -125,5 +125,7 @@
     <string name="InfoManger">管理</string>
     <string name="logout">退出</string>
     <string name="wait">请等待</string>
+    <string name="DeleteNormal">删除</string>
+    <string name="AlreadyDelete">已经删除</string>
 </resources>
 

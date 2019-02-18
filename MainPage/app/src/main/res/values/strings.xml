@@ -124,6 +124,8 @@
     <string name="InfoManger">Management</string>
     <string name="logout">Logout</string>
     <string name="wait">Please wait for moment,</string>
+    <string name="DeleteNormal">Del</string>
+    <string name="AlreadyDelete">This share was deleted already.</string>
 
 
 </resources>

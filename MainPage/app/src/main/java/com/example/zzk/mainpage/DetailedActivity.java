@@ -129,6 +129,7 @@ public class DetailedActivity extends AppCompatActivity implements CommentDialog
         String content = intent.getStringExtra("content");
         String images = intent.getStringExtra("images");
         String id = intent.getStringExtra("id");
+        String userID = intent.getStringExtra("userID");
         detailedInfo = new HashMap<>();
         detailedInfo.put("username", username);
         detailedInfo.put("date_time", date_time);
@@ -136,6 +137,7 @@ public class DetailedActivity extends AppCompatActivity implements CommentDialog
         detailedInfo.put("content", content);
         detailedInfo.put("images", images);
         detailedInfo.put("id", id);
+        detailedInfo.put("userID",userID);
 
         commentListData = new ArrayList<>();
         //初始化视图

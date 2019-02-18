@@ -4,6 +4,8 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.content.SharedPreferences;
 
+import com.example.cyy.module.UserInfo;
+
 import java.util.Calendar;
 import java.util.Date;
 

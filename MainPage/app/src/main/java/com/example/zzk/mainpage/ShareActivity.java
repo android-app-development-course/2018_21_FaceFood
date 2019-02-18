@@ -36,6 +36,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.cyy.module.UserInfo;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.JsonHttpResponseHandler;
@@ -389,6 +390,7 @@ public class ShareActivity extends AppCompatActivity {
         try {
             SharedPreferences sharedPreferences = this.getSharedPreferences("loginStatus", Context.MODE_PRIVATE);
 
+            jsonObject.put("userID",UserInfo.getUser().getId());
             jsonObject.put("username",sharedPreferences.getString("nickname", "匿名用户"));            //这里后期需要处理名字
             jsonObject.put("location",spinner.getSelectedItem().toString());        //这里需要确认获取的值是否成功
             jsonObject.put("content",etDynamic.getText().toString());
