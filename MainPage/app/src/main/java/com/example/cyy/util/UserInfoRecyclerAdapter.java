@@ -41,7 +41,7 @@ public class UserInfoRecyclerAdapter extends RecyclerView.Adapter<UserInfoRecycl
     }
     static class ViewHolder extends RecyclerView.ViewHolder{
         TextView des;
-        Button value;
+        TextView value;
         public ViewHolder(View view){
             super(view);
             des=view.findViewById(R.id.info_item_desc);
