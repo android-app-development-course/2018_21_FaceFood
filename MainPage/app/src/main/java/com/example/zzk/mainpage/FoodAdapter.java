@@ -34,6 +34,11 @@ public class FoodAdapter extends BaseAdapter {
         this.recommend_food = recommend_food;
     }
 
+    public void freshAll(List<Map<String,Object>> newData){
+        data=newData;
+        notifyDataSetChanged();
+    }
+
     @Override
     public Object getItem(int position) {
         if(position < 1) {

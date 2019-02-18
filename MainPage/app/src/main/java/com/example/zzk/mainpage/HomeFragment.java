@@ -47,14 +47,18 @@ public class HomeFragment extends Fragment {
     public View onCreateView(final LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_home, null);
         view.setVisibility(View.INVISIBLE);
+//        getNormalItems();
+
+        return view;
+    }
+    @Override
+    public void onStart(){
+        super.onStart();
         initView();
 
         recommendItems = new ArrayList<>();
         normalItems = new ArrayList<>();
         getRecommendItems();
-//        getNormalItems();
-
-        return view;
     }
 
     private void initView() {
@@ -186,7 +190,8 @@ public class HomeFragment extends Fragment {
                                 view.setVisibility(View.VISIBLE);
                             }
                             else {
-                                foodAdapter.notifyDataSetChanged();
+                                foodAdapter.freshAll(normalItems);
+                                //foodAdapter.notifyDataSetChanged();
                                 swipeRefreshLayout.setRefreshing(false);
                             }
                         }
