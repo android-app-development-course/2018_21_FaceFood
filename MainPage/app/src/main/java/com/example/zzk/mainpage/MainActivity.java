@@ -42,7 +42,7 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        //UserInfo.initUserInfo("test", getApplicationContext(),null);
+        //UserInfo.initLoginedUserInfo("test", getApplicationContext(),null);
         super.onCreate(savedInstanceState);
 
         requestWindowFeature(Window.FEATURE_NO_TITLE);//will hide the title

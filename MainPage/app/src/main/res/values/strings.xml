@@ -126,6 +126,7 @@
     <string name="wait">Please wait for moment,</string>
     <string name="DeleteNormal">Del</string>
     <string name="AlreadyDelete">This share was deleted already.</string>
+    <string name="badNetWork">Bad network</string>
 
 
 </resources>

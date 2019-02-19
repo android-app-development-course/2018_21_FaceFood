@@ -2,13 +2,11 @@ package com.example.zzk.mainpage;
 
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
@@ -20,11 +18,7 @@ import com.example.cyy.module.UserInfo;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 
-import org.json.JSONArray;
 import org.json.JSONObject;
-
-import java.util.List;
-import java.util.Map;
 
 import cz.msebera.android.httpclient.Header;
 import cz.msebera.android.httpclient.entity.StringEntity;
@@ -51,7 +45,7 @@ public class Login extends AppCompatActivity {
         if(loginStatusKeeper.getLoginStatus(getApplicationContext()) == loginStatusKeeper.LOGIN)
         {
             loginStatusKeeper.updateLoginStatus(getApplicationContext());
-            UserInfo.initUserInfo(loginStatusKeeper.getUserID(), getApplicationContext(), null);
+            UserInfo.initLoginedUserInfo(loginStatusKeeper.getUserID(), getApplicationContext(), null);
             Intent intent = new Intent(getApplicationContext(), MainActivity.class);
             startActivity(intent);
         }
@@ -99,7 +93,7 @@ public class Login extends AppCompatActivity {
                             Toast.makeText(getApplicationContext(), "登陆成功", Toast.LENGTH_LONG).show();
                             loginStatusKeeper.updateLoginStatus(getApplicationContext());
                             Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-                            //UserInfo.initUserInfo(studentNumber.getText().toString(),ct);
+                            //UserInfo.initLoginedUserInfo(studentNumber.getText().toString(),ct);
                             startActivity(intent);
                         }
                         else if(message.what == LOGIN_FAILED) {
@@ -137,7 +131,7 @@ public class Login extends AppCompatActivity {
 
                                     String nickname = jsonObject.getString("nickname");
                                     loginStatusKeeper.saveNickname(getApplicationContext(), nickname);
-                                    UserInfo.initUserInfo(id, getApplicationContext(),null);
+                                    UserInfo.initLoginedUserInfo(id, getApplicationContext(),null);
                                 }
                                 else if(loginStatus.equals("fail")) {
                                     message.what = LOGIN_FAILED;

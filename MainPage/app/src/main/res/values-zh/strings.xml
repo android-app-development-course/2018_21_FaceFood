@@ -127,5 +127,6 @@
     <string name="wait">请等待</string>
     <string name="DeleteNormal">删除</string>
     <string name="AlreadyDelete">已经删除</string>
+    <string name="badNetWork">网络不好</string>
 </resources>
 

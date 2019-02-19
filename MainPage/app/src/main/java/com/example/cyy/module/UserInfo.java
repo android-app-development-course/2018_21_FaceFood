@@ -1,42 +1,42 @@
 package com.example.cyy.module;
 
 import android.content.Context;
-import android.net.sip.SipSession;
 import android.util.Log;
 import android.widget.Toast;
 
 import com.example.cyy.util.BackEnd;
 import com.example.cyy.util.NetDoneListener;
-import com.example.zzk.mainpage.JsonManager;
-import com.example.zzk.mainpage.NetManager;
 import com.example.zzk.mainpage.R;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
-import com.loopj.android.http.TextHttpResponseHandler;
 import com.loopj.android.http.JsonHttpResponseHandler;
 
-import org.json.JSONException;
 import org.json.JSONObject;
-
-import java.util.HashMap;
 
 import cz.msebera.android.httpclient.Header;
 
-//暂时设计成单体类，如果以后需要查看、更改他人信息的话，再进行修改
 public class UserInfo {
     public enum InfoType{
         name,id,address,gender,photo
     };
-    static public void initUserInfo(final String id, final Context context, NetDoneListener netDoneListener)
+
+    static public void initLoginedUserInfo(final String id, final Context context, NetDoneListener netDoneListener)
     {
         me=new UserInfo();
         me.setId(id);
         me.downdateUserInfo(netDoneListener);
     }
-    static public void logOut(){
+    static public void Logout(){
         me=null;
     }
+    static public UserInfo getUser(){
+        return me;
+    }
+
+    private UserInfo(){}
+    public UserInfo(String id){this.id=id;}
+
     public boolean updateUserInfo(final Context context){
         if(me==null){
             return false;
@@ -82,23 +82,22 @@ public class UserInfo {
                             _this.setProfilePhotoAdd(ret.getString("profilePhotoAdd"));
                             _this.setGender(ret.getString("gender"));
                             if(netDoneListener!=null)
-                                netDoneListener.OnNetDone();
+                                netDoneListener.OnSuccess();
                             _this.setInitComplete();
                             Log.i("UserInfo","Successfully obaint user info");
                         }catch (Exception e){
-                            UserInfo.logOut();
+                            UserInfo.Logout();
                         }
                     }
 
                     @Override
                     public void onFailure(int statusCode, Header[] headers, String res, Throwable t) {
                         // called when response HTTP status is "4XX" (eg. 401, 403, 404)
+                        if(netDoneListener!=null)
+                            netDoneListener.onFailed();
                     }
                 });
         return;
-    }
-    static public UserInfo getUser(){
-        return me;
     }
     public enum Gender{
         MALE(0),FEMALE(1),UNKNOW(-1);
@@ -189,8 +188,5 @@ public class UserInfo {
         this.setProfilePhotoAdd(profilePhotoAdd);
         this.setId(id);
         this.setGender(gender);
-    }
-    private UserInfo(){
-        ;
     }
 }

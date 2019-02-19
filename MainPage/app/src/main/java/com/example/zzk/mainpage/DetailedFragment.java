@@ -17,6 +17,8 @@ import android.widget.Toast;
 
 import com.example.cyy.module.UserInfo;
 import com.example.cyy.util.BackEnd;
+import com.example.cyy.util.ImageViewUrlSetter;
+import com.example.cyy.util.NetDoneListener;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.JsonHttpResponseHandler;
@@ -108,6 +110,22 @@ public class DetailedFragment extends Fragment{
         catch (Exception e) {
             e.printStackTrace();
         }
+
+
+
+        final ImageView profilePic = view.findViewById(R.id.imageView1);
+        final UserInfo otherUser = new UserInfo(userIDInNormal);
+        otherUser.downdateUserInfo(new NetDoneListener() {
+            @Override
+            public void OnSuccess() {
+                new ImageViewUrlSetter(profilePic).set(otherUser.getProfilePhotoAdd());
+            }
+
+            @Override
+            public void onFailed() {
+                Toast.makeText(getContext(), getString(R.string.badNetWork), Toast.LENGTH_SHORT).show();
+            }
+        });
         return view;
     }
 
