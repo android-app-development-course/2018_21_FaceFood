@@ -47,7 +47,6 @@ public class CommentListAdapter extends BaseAdapter {
         username.setText((String) data.get(position).get("username"));
         commentContent.setText((String) data.get(position).get("commentContent"));
 
-        UserInfo.getLoginedUser(context).getId();
         return convertView;
     }
 

@@ -139,7 +139,7 @@ public class CommentDialog extends Dialog implements View.OnClickListener {
 
     //数据回调接口
     public interface OnCommitListener {
-        void onCommit(EditText et, View v);//提交数据
+        void onCommit(EditText et, View v);//提交数据//该接口在DetailedActivity.java中使用
         // void onGetLocation();//定位
         // void onDeleteLocation();//删除定位
         // void onAnonymousChecked(CompoundButton buttonView, boolean isChecked);
