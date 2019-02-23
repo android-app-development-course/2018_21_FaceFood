@@ -193,21 +193,22 @@ public class DetailedActivity extends AppCompatActivity implements CommentDialog
 
         myFragmentPagerAdapter.setCommentList(commentListData);
         SharedPreferences sharedPreferences = DetailedActivity.this.getSharedPreferences("loginStatus", MODE_PRIVATE);
-        String student_number = sharedPreferences.getString("userID", "1");
-        String commentContent = et.getText().toString();
-        String username = sharedPreferences.getString("nickname", "error");
+        String student_number = sharedPreferences.getString("userID", "1");//获取学号
+        String commentContent = et.getText().toString();//获取评论语
+        String username = sharedPreferences.getString("nickname", "error");//获取用户名
         Map<String, Object> oneComment = new HashMap<>();
         oneComment.put("username", username);
         oneComment.put("commentContent", commentContent);
-        commentListData.add(oneComment);
+        commentListData.add(oneComment);//加上评论
 
+        //上传评论到数据库
         try {
             JSONObject jsonObject = new JSONObject();
             jsonObject.put("normalID", detailedInfo.get("id"));
             jsonObject.put("student_number", student_number);
             jsonObject.put("commentContent", commentContent);
             StringEntity entity = new StringEntity(jsonObject.toString(), "UTF-8");
-            AsyncHttpClient asyncHttpClient = new AsyncHttpClient();
+            AsyncHttpClient asyncHttpClient = new AsyncHttpClient();//使用asynchttpclient访问网络，创建实例
             asyncHttpClient.post(DetailedActivity.this, BackEnd.ip+"/postComment", entity, "application/json",
                     new AsyncHttpResponseHandler() {
                         @Override
