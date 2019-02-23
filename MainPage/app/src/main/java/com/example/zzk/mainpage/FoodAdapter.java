@@ -91,7 +91,7 @@ public class FoodAdapter extends BaseAdapter {
             sliderLayout.setScrollTimeInSec(1);
             for(int i = 0; i < recommend_food.size(); i++) {
                 SliderView sliderView = new SliderView(context);
-                String description = (String)recommend_food.get(i).get("recommend_food_description");
+                final String description = (String)recommend_food.get(i).get("recommend_food_description");
                 String imagePath = (String) recommend_food.get(i).get("recommend_food_image");
                 imagePath = BackEnd.ip+"/" + imagePath;
                 sliderView.setImageUrl(imagePath);
@@ -101,7 +101,8 @@ public class FoodAdapter extends BaseAdapter {
                 sliderView.setOnSliderClickListener(new SliderView.OnSliderClickListener() {
                     @Override
                     public void onSliderClick(SliderView sliderView) {
-                        Toast.makeText(context, "This is slider " + (finalI + 1), Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(context, "This is slider " + (finalI + 1), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(context,description,Toast.LENGTH_LONG).show();
                     }
                 });
                 sliderLayout.addSliderView(sliderView);

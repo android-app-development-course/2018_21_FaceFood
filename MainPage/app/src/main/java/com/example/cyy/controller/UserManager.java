@@ -22,7 +22,8 @@ public class UserManager extends Fragment {
                 @Override
                 public void onClick(View v) {
                     Intent intent = new Intent(getContext(),Login.class);
-                    getContext().deleteSharedPreferences("loginStatus");
+                    getContext().getSharedPreferences("loginStatus",getContext().MODE_PRIVATE).edit().clear().apply();
+                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
                     startActivity(intent);
                 }
             });

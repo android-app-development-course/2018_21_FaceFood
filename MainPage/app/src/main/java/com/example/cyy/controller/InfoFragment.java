@@ -2,7 +2,6 @@ package com.example.cyy.controller;
 
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -43,7 +42,7 @@ public class InfoFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        info=UserInfo.getUser();
+        info=UserInfo.getLoginedUser(getContext());
 
         View forRet = inflater.inflate(R.layout.fragment_info, null);
 
@@ -51,7 +50,8 @@ public class InfoFragment extends Fragment {
         tabLayout=forRet.findViewById(R.id.htab_tabs);
         photo=forRet.findViewById(R.id.htab_header);
 
-        new ImageViewUrlSetter(photo).set(BackEnd.ip+"/"+info.getProfilePhotoAdd());
+        if(info!=null)
+            new ImageViewUrlSetter(photo,getContext()).set(BackEnd.ip+"/"+info.getProfilePhotoAdd());
 
         viewPager.setAdapter(new ViewPagerAdapter(getFragmentManager(),getContext()));
         tabLayout.setupWithViewPager(viewPager);
@@ -69,6 +69,7 @@ public class InfoFragment extends Fragment {
     //上传图片
     @Override
     public void onActivityResult(int requestCode,int b,Intent data){
+        if(data==null)return;
         Uri tmp=data.getData();
         try {
             InputStream picSelected = getContext().getContentResolver().openInputStream(tmp);
@@ -82,6 +83,16 @@ public class InfoFragment extends Fragment {
                 public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
                     Log.i("cyy uploading pic done","Success");
                     Toast.makeText(getContext(), getString(R.string.SuccessUpdateProfilePhoto), Toast.LENGTH_SHORT).show();
+                    UserInfo.getLoginedUser(getContext()).downdateUserInfo(new NetDoneListener() {
+                        @Override
+                        public void OnSuccess() {
+                            new ImageViewUrlSetter(photo,getContext()).set(BackEnd.ip+'/'+UserInfo.getLoginedUser(getContext()).getProfilePhotoAdd());
+                        }
+
+                        @Override
+                        public void onFailed() {
+                        }
+                    });
                 }
 
                 @Override

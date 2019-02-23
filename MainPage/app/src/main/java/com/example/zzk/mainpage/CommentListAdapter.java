@@ -8,6 +8,8 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.cyy.module.UserInfo;
+
 import java.util.List;
 import java.util.Map;
 
@@ -44,6 +46,8 @@ public class CommentListAdapter extends BaseAdapter {
         TextView commentContent = convertView.findViewById(R.id.comment_list_content);
         username.setText((String) data.get(position).get("username"));
         commentContent.setText((String) data.get(position).get("commentContent"));
+
+        UserInfo.getLoginedUser(context).getId();
         return convertView;
     }
 

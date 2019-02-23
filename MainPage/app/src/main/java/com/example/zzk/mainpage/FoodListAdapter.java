@@ -54,6 +54,7 @@ public class FoodListAdapter extends BaseAdapter {
     public View getView(int position, View convertView, ViewGroup parent) {
         FoodItem item = new FoodItem();
         convertView = layoutInflater.inflate(R.layout.food_item, null);
+
         item.foodImage = convertView.findViewById(R.id.food_image);
         item.foodName = convertView.findViewById(R.id.food_name);
         item.foodUp = convertView.findViewById(R.id.food_up);

@@ -10,9 +10,7 @@ import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.media.Image;
 import android.net.Uri;
-import android.preference.PreferenceManager;
 import android.provider.MediaStore;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
@@ -39,18 +37,14 @@ import android.widget.Toast;
 import com.example.cyy.module.UserInfo;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
-import com.loopj.android.http.JsonHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
 import java.text.SimpleDateFormat;
@@ -390,7 +384,7 @@ public class ShareActivity extends AppCompatActivity {
         try {
             SharedPreferences sharedPreferences = this.getSharedPreferences("loginStatus", Context.MODE_PRIVATE);
 
-            jsonObject.put("userID",UserInfo.getUser().getId());
+            jsonObject.put("userID",UserInfo.getLoginedUser(getApplicationContext()).getId());
             jsonObject.put("username",sharedPreferences.getString("nickname", "匿名用户"));            //这里后期需要处理名字
             jsonObject.put("location",spinner.getSelectedItem().toString());        //这里需要确认获取的值是否成功
             jsonObject.put("content",etDynamic.getText().toString());

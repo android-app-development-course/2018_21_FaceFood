@@ -1,11 +1,13 @@
 package com.example.cyy.module;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.util.Log;
 import android.widget.Toast;
 
 import com.example.cyy.util.BackEnd;
 import com.example.cyy.util.NetDoneListener;
+import com.example.zzk.mainpage.Login;
 import com.example.zzk.mainpage.R;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
@@ -14,6 +16,8 @@ import com.loopj.android.http.JsonHttpResponseHandler;
 
 import org.json.JSONObject;
 
+import java.util.Map;
+
 import cz.msebera.android.httpclient.Header;
 
 public class UserInfo {
@@ -21,34 +25,58 @@ public class UserInfo {
         name,id,address,gender,photo
     };
 
-    static public void initLoginedUserInfo(final String id, final Context context, NetDoneListener netDoneListener)
+    static public void initLoginedUserInfo(final String id, final Context context, final NetDoneListener netDoneListener)
     {
-        me=new UserInfo();
+        final UserInfo me =new UserInfo();
         me.setId(id);
-        me.downdateUserInfo(netDoneListener);
+        me.downdateUserInfo(new NetDoneListener() {
+            @Override
+            public void OnSuccess() {
+                SharedPreferences LoginedUser = context.getSharedPreferences("LoginedUser",context.MODE_PRIVATE);
+                SharedPreferences.Editor editor = LoginedUser.edit();
+                editor.putString("id",me.getId());
+                editor.putString("name",me.getName());
+                editor.putString("add",me.getAdd());
+                editor.putString("profilePhotoAdd",me.getProfilePhotoAdd());
+                editor.putString("gender",me.getGender().toString());
+                editor.commit();
+                if(netDoneListener!=null)netDoneListener.OnSuccess();
+            }
+
+            @Override
+            public void onFailed() {
+                if(netDoneListener!=null)netDoneListener.onFailed();
+            }
+        });
     }
-    static public void Logout(){
-        me=null;
+    static public void Logout(Context context){
+        context.getSharedPreferences("LoginedUser",context.MODE_PRIVATE).edit().clear();
     }
-    static public UserInfo getUser(){
-        return me;
+    static public UserInfo getLoginedUser(Context context){
+        SharedPreferences l = context.getSharedPreferences("LoginedUser",Context.MODE_PRIVATE);
+        if(l.contains("id")&&l.contains("name")&&l.contains("add")&&l.contains("profilePhotoAdd")&&l.contains("gender")) {
+            return new UserInfo(
+                    l.getString("name", ""),
+                    l.getString("add",""),
+                    l.getString("profilePhotoAdd",""),
+                    l.getString("gender",""),
+                    l.getString("id","")
+            );
+        }
+        else throw new NullPointerException("当前登录状态不完整或者存在");
     }
 
     private UserInfo(){}
     public UserInfo(String id){this.id=id;}
 
     public boolean updateUserInfo(final Context context){
-        if(me==null){
-            return false;
-        }
         AsyncHttpClient client = new AsyncHttpClient();
         RequestParams params = new RequestParams();
         params.put("student_id", id);
         params.put("nickName",name);
         if(profilePhotoAdd!=null)
             params.put("profilePhotoAdd",profilePhotoAdd);
-        if(this.gender!=gender.UNKNOW)
-            params.put("gender",String.valueOf(gender.getValue()));
+            params.put("gender",gender);
         if(this.add!=null)
             params.put("address",this.add);
         client.get(BackEnd.ip+"/setUserinfo", params, new AsyncHttpResponseHandler() {
@@ -86,7 +114,6 @@ public class UserInfo {
                             _this.setInitComplete();
                             Log.i("UserInfo","Successfully obaint user info");
                         }catch (Exception e){
-                            UserInfo.Logout();
                         }
                     }
 
@@ -99,24 +126,6 @@ public class UserInfo {
                 });
         return;
     }
-    public enum Gender{
-        MALE(0),FEMALE(1),UNKNOW(-1);
-        private int value;
-        private Gender(int value){
-            this.value=value;
-        }
-        int getValue(){return value;}
-        public String toString(){
-            switch (value) {
-                case 0:
-                    return "male";
-                case 1:
-                    return "female";
-                default:
-                    return "Unknow";
-            }
-        }
-    };
 
     public String getName() {
         return name;
@@ -142,22 +151,12 @@ public class UserInfo {
         this.profilePhotoAdd = profilePhotoAdd;
     }
 
-    public Gender getGender() {
-        return gender;
+    public String getGender(){
+        return this.gender;
     }
 
-    public void setGender(Gender gender) {
-        this.gender = gender;
-    }
     public void setGender(String gender){
-        Gender myGender=Gender.UNKNOW;
-        if(gender=="男"||gender=="boy"||gender=="male"||gender=="man"||gender==String.valueOf(Gender.MALE.value)){
-            myGender=Gender.MALE;
-        }
-        else if(gender=="女"||gender=="girl"||gender=="female"||gender=="woman"||gender==String.valueOf(Gender.MALE.value)){
-            myGender=Gender.FEMALE;
-        }
-        this.gender=myGender;
+        this.gender=gender;
     }
     public String getId() {
         return id;
@@ -170,10 +169,9 @@ public class UserInfo {
     private String name;
     private String add;
     private String profilePhotoAdd;//头像文件的地址
-    private Gender gender=Gender.UNKNOW;
+    private String gender;
     private String id;
     private boolean isInit=false;
-    static private UserInfo me=null;
 
     public void setInitComplete(){
         isInit=true;

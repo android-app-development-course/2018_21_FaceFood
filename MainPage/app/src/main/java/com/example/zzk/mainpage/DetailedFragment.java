@@ -1,9 +1,8 @@
 package com.example.zzk.mainpage;
 
-import android.media.Image;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.annotation.StringRes;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -11,26 +10,21 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.cyy.controller.OtherUserInfo;
 import com.example.cyy.module.UserInfo;
 import com.example.cyy.util.BackEnd;
 import com.example.cyy.util.ImageViewUrlSetter;
 import com.example.cyy.util.NetDoneListener;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
-import com.loopj.android.http.JsonHttpResponseHandler;
-import com.loopj.android.http.RequestParams;
 import com.squareup.picasso.Picasso;
-import com.squareup.picasso.Request;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Map;
 
 import cz.msebera.android.httpclient.Header;
@@ -57,9 +51,9 @@ public class DetailedFragment extends Fragment{
         detailedLocation.setText((String) detailedInfo.get("location"));
         detailedContent.setText((String) detailedInfo.get("content"));
 
-        String userIDInNormal =  (String)detailedInfo.get("userID");
+        final String userIDInNormal =  (String)detailedInfo.get("userID");
         final String normalID  = (String)detailedInfo.get("id");
-        if(userIDInNormal.contentEquals(UserInfo.getUser().getId())){
+        if(userIDInNormal.contentEquals(UserInfo.getLoginedUser(getContext()).getId())){
             Button delDetail = view.findViewById(R.id.deleteNormal);
             delDetail.setVisibility(View.VISIBLE);
             delDetail.setOnClickListener(new View.OnClickListener() {
@@ -118,12 +112,33 @@ public class DetailedFragment extends Fragment{
         otherUser.downdateUserInfo(new NetDoneListener() {
             @Override
             public void OnSuccess() {
-                new ImageViewUrlSetter(profilePic).set(otherUser.getProfilePhotoAdd());
+                new ImageViewUrlSetter(profilePic,getContext()).set(BackEnd.ip+'/'+otherUser.getProfilePhotoAdd());
             }
 
             @Override
             public void onFailed() {
                 Toast.makeText(getContext(), getString(R.string.badNetWork), Toast.LENGTH_SHORT).show();
+            }
+        });
+        profilePic.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final UserInfo user = new UserInfo(userIDInNormal);
+                user.downdateUserInfo(new NetDoneListener() {
+                    @Override
+                    public void OnSuccess() {
+                        Intent intent = new Intent(getContext(),OtherUserInfo.class);
+                        intent.putExtra("name",user.getName());
+                        intent.putExtra("add",user.getAdd());
+                        intent.putExtra("pp",user.getProfilePhotoAdd());
+                        startActivity(intent);
+                    }
+
+                    @Override
+                    public void onFailed() {
+                        Toast.makeText(getContext(), getString(R.string.badNetWork), Toast.LENGTH_SHORT).show();
+                    }
+                });
             }
         });
         return view;

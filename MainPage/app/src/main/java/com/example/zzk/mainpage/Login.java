@@ -24,6 +24,11 @@ import cz.msebera.android.httpclient.Header;
 import cz.msebera.android.httpclient.entity.StringEntity;
 import com.example.cyy.util.BackEnd;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+
 public class Login extends AppCompatActivity {
 
     private EditText studentNumber;
@@ -40,6 +45,21 @@ public class Login extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        {
+            Context c = getApplicationContext();
+            try {
+                FileOutputStream outStream = this.openFileOutput("b.txt", Context.MODE_PRIVATE);
+                outStream.write("test".getBytes());
+                outStream.close();
+                File f = new File("/data/data/com.example.zzk.mainpage/files","b.txt");
+                boolean isExits = f.exists();
+            }catch (FileNotFoundException e){
+                ;
+            }catch (IOException e) {
+                ;
+            }
+        }
 
         loginStatusKeeper = new LoginStatusKeeper();
         if(loginStatusKeeper.getLoginStatus(getApplicationContext()) == loginStatusKeeper.LOGIN)

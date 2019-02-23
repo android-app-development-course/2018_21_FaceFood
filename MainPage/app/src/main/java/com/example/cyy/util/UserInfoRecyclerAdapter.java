@@ -116,18 +116,17 @@ public class UserInfoRecyclerAdapter extends RecyclerView.Adapter<UserInfoRecycl
                             spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                                 @Override
                                 public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                                    String gender="unknow";
                                     if(position==0){
-                                        info.setGender(UserInfo.Gender.MALE);
-                                        tv.setText(UserInfo.Gender.MALE.toString());
+                                        gender=context.getString(R.string.GENDER_MALE);
                                     }
                                     else if(position==1){
-                                        info.setGender(UserInfo.Gender.FEMALE);
-                                        tv.setText(UserInfo.Gender.FEMALE.toString());
+                                        gender=context.getString(R.string.GENDER_FEMALE);
                                     }
-                                    else{
-                                        info.setGender(UserInfo.Gender.UNKNOW);
-                                        tv.setText(UserInfo.Gender.UNKNOW.toString());
-                                    }
+
+                                    info.setGender(gender);
+                                    tv.setText(gender);
+
                                     info.updateUserInfo(context);
                                 }
 

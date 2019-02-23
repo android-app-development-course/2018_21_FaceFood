@@ -29,6 +29,7 @@
         <activity android:name=".MainActivity" />
         <activity android:name=".DetailedActivity" />
         <activity android:name=".SignUp" android:noHistory="true"></activity>
+        <activity android:name="com.example.cyy.controller.OtherUserInfo"></activity>
     </application>
 
 
