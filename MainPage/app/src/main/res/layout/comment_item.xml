@@ -24,6 +24,13 @@
         android:id="@+id/comment_list_delete"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:text="Del"
+        android:visibility="gone"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:text=" "/>
 
 </LinearLayout>

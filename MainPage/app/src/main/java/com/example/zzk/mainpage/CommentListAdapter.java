@@ -47,6 +47,14 @@ public class CommentListAdapter extends BaseAdapter {
         username.setText((String) data.get(position).get("username"));
         commentContent.setText((String) data.get(position).get("commentContent"));
 
+////        final String myuserid=UserInfo.getLoginedUser(context).getId();//查看的人的id
+        final String commenter_id=(String)data.get(position).get("user_id");//评论的人的id
+
+        if(commenter_id.contentEquals(UserInfo.getLoginedUser(context).getId())){//判断是不是自己的评论
+            TextView delDetail = convertView.findViewById(R.id.comment_list_delete);
+            delDetail.setVisibility(View.VISIBLE);
+        }
+
         return convertView;
     }
 
