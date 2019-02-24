@@ -199,6 +199,7 @@ public class DetailedActivity extends AppCompatActivity implements CommentDialog
         Map<String, Object> oneComment = new HashMap<>();
         oneComment.put("username", username);
         oneComment.put("commentContent", commentContent);
+        oneComment.put("user_id",student_number);
         commentListData.add(oneComment);//加上评论
 
         //上传评论到数据库
