@@ -34,6 +34,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.cyy.controller.FlavourChose;
 import com.example.cyy.module.UserInfo;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
@@ -62,11 +63,15 @@ import com.example.cyy.util.BackEnd;
 
 public class ShareActivity extends AppCompatActivity {
 
+
+    private int sour=0,sweet=0,bitter=0,spicy=0;
+
     private GridView gridView1;              //网格显示缩略图
     private Button btnRelease;               //发布按钮
     private ImageView backAction;
     private TextView releaseAction;
     private final int IMAGE_OPEN = 1;        //打开图片标记
+    private final int GET_FLAVOUR=3;        // 回收特性标记
     private String pathImage;                //选择图片路径
     private Bitmap bmp;                      //导入临时图片
     private ArrayList<HashMap<String, Object>> imageItem;
@@ -178,6 +183,14 @@ public class ShareActivity extends AppCompatActivity {
             }
         });
 
+        findViewById(R.id.share_chose_flavour).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(),FlavourChose.class);
+                startActivityForResult(intent,GET_FLAVOUR);
+            }
+        });
+
 
         btnRelease.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -284,6 +297,14 @@ public class ShareActivity extends AppCompatActivity {
                 imageUri.add(uri);
                 //----------------------------------
             }
+        }
+        else if(requestCode==GET_FLAVOUR && resultCode == RESULT_OK){
+            Bundle bundle = data.getExtras();
+            sour = bundle.getInt("sour");
+            sweet = bundle.getInt("sweet");
+            bitter = bundle.getInt("bitter");
+            spicy = bundle.getInt("spicy");
+            Toast.makeText(getApplicationContext(), String.valueOf(sour)+','+String.valueOf(sweet)+','+String.valueOf(bitter)+','+String.valueOf(spicy), Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -398,6 +419,10 @@ public class ShareActivity extends AppCompatActivity {
             String dateTime = new String(simpleDateFormat.format(date));
 
             jsonObject.put("time",dateTime);
+            jsonObject.put("sour",sour);
+            jsonObject.put("sweet",sweet);
+            jsonObject.put("bitter",bitter);
+            jsonObject.put("spicy",spicy);
 
         } catch (JSONException e) {
             e.printStackTrace();

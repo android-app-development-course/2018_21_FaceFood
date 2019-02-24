@@ -46,21 +46,6 @@ public class Login extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        {
-            Context c = getApplicationContext();
-            try {
-                FileOutputStream outStream = this.openFileOutput("b.txt", Context.MODE_PRIVATE);
-                outStream.write("test".getBytes());
-                outStream.close();
-                File f = new File("/data/data/com.example.zzk.mainpage/files","b.txt");
-                boolean isExits = f.exists();
-            }catch (FileNotFoundException e){
-                ;
-            }catch (IOException e) {
-                ;
-            }
-        }
-
         loginStatusKeeper = new LoginStatusKeeper();
         if(loginStatusKeeper.getLoginStatus(getApplicationContext()) == loginStatusKeeper.LOGIN)
         {

@@ -128,5 +128,10 @@
     <string name="DeleteNormal">删除</string>
     <string name="AlreadyDelete">已经删除</string>
     <string name="badNetWork">网络不好</string>
+    <string name="choseFlavour">选择口味 ></string>
+    <string name="sour_degree">酸度</string>
+    <string name="sweet_degree">甜度</string>
+    <string name="bitter_degree">苦度</string>
+    <string name="spicy_degree">辣度</string>
 </resources>
 

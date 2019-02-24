@@ -127,6 +127,12 @@ public class FoodAdapter extends BaseAdapter {
             item.foodName.setText((String) data.get(position - 1).get("food_name"));
             item.foodTime.setText((String) data.get(position - 1).get("food_time"));
             item.foodPlace.setText((String) data.get(position -1).get("food_place"));
+
+            ((ImageView)convertView.findViewById(R.id.Fsuan)).setAlpha((float)0.2*(int)(data.get(position-1).get("food_suan")));
+            ((ImageView)convertView.findViewById(R.id.FTian)).setAlpha((float)0.2*(int)(data.get(position-1).get("food_tian")));
+            ((ImageView)convertView.findViewById(R.id.FKu)).setAlpha((float)0.2*(int)(data.get(position-1).get("food_ku")));
+            ((ImageView)convertView.findViewById(R.id.FLa)).setAlpha((float)0.2*(int)(data.get(position-1).get("food_la")));
+
             return convertView;
         }
         return convertView;

@@ -52,7 +52,16 @@
         android:columnWidth="90dp"
         android:stretchMode="columnWidth"
         android:gravity="center" >
+
+
     </GridView>
+
+    <Button
+        android:id="@+id/share_chose_flavour"
+        android:layout_width="match_parent"
+        android:layout_height="44dp"
+        android:gravity="right"
+        android:text="@string/choseFlavour" />
 
     <LinearLayout
         android:layout_marginTop="50dp"
@@ -64,14 +73,15 @@
             android:layout_height="match_parent"
             android:src="@mipmap/location57"
             android:layout_marginRight="5dp"/>
+
         <TextView
             android:id="@+id/tvShowPlace"
             android:layout_width="wrap_content"
             android:layout_height="40dp"
             android:gravity="center"
-            android:textSize="17sp"
+            android:text="请选择饭堂地点："
             android:textColor="#000000"
-            android:text="请选择饭堂地点："/>
+            android:textSize="17sp" />
         <Spinner
             android:id="@+id/SpSelectPlace"
             android:layout_width="wrap_content"
@@ -91,4 +101,5 @@
         android:id="@+id/ig"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
+
 </LinearLayout>

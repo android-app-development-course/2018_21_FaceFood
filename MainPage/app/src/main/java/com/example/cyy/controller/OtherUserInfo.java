@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.cyy.util.BackEnd;
 import com.example.cyy.util.ImageViewUrlSetter;
 import com.example.zzk.mainpage.R;
 
@@ -24,6 +25,6 @@ public class OtherUserInfo extends AppCompatActivity {
         name.setText(bundle.getString("name"));
         add.setText(bundle.getString("add"));
         String ppUrl = bundle.getString("pp");
-        if(!ppUrl.isEmpty()) new ImageViewUrlSetter(pp,getApplicationContext()).set(ppUrl);
+        if(!ppUrl.isEmpty()) new ImageViewUrlSetter(pp,getApplicationContext()).set(BackEnd.ip+'/'+ppUrl);
     }
 }

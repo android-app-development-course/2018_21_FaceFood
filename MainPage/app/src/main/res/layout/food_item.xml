@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/food_card"
     android:layout_width="match_parent"
@@ -11,12 +12,12 @@
 
         <ImageView
             android:id="@+id/food_image"
-            android:layout_marginTop="10dp"
-            android:layout_marginBottom="10dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
             android:layout_width="150dp"
             android:layout_height="150dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginBottom="10dp"
             android:background="@color/light_blue_no_image"
             android:contentDescription="Nothing"
             android:scaleType="centerCrop" />
@@ -24,8 +25,8 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginLeft="@dimen/vertical_padding"
             android:layout_marginStart="@dimen/vertical_padding"
+            android:layout_marginLeft="@dimen/vertical_padding"
             android:layout_toEndOf="@id/food_image"
             android:layout_toRightOf="@id/food_image"
             android:gravity="center_vertical"
@@ -37,61 +38,61 @@
                 android:layout_width="wrap_content"
                 android:layout_height="0dp"
                 android:layout_marginTop="10dp"
-                tools:text="food name"
-                android:layout_weight="1"/>
+                android:layout_weight="1"
+                tools:text="food name" />
 
             <TextView
                 android:id="@+id/food_place"
                 android:layout_width="wrap_content"
                 android:layout_height="0dp"
-                tools:text="food place"
-                android:layout_weight="1"/>
+                android:layout_weight="1"
+                tools:text="food place" />
 
             <TextView
                 android:id="@+id/food_time"
                 android:layout_width="wrap_content"
                 android:layout_height="0dp"
-                tools:text="food time"
-                android:layout_weight="1"/>
+                android:layout_weight="1"
+                tools:text="food time" />
 
             <LinearLayout
-                android:layout_weight="1"
                 android:layout_width="match_parent"
-                android:layout_height="0dp">
+                android:layout_height="0dp"
+                android:layout_weight="1">
 
                 <LinearLayout
                     android:layout_width="0dp"
-                    android:layout_weight="1"
-                    android:layout_height="match_parent">
+                    android:layout_height="match_parent"
+                    android:layout_weight="1">
 
                     <ImageView
                         android:layout_width="@dimen/icon_size"
                         android:layout_height="@dimen/icon_size"
-                        android:src="@drawable/eat"/>
+                        android:src="@drawable/eat" />
 
                     <TextView
                         android:id="@+id/food_up"
-                        android:layout_marginLeft="10dp"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" />
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp" />
 
                 </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="0dp"
-                    android:layout_weight="1"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1">
 
                     <ImageView
                         android:layout_width="@dimen/icon_size"
                         android:layout_height="@dimen/icon_size"
-                        android:src="@drawable/nauseated"/>
+                        android:src="@drawable/nauseated" />
 
                     <TextView
                         android:id="@+id/food_down"
-                        android:layout_marginLeft="10dp"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" />
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp" />
 
                 </LinearLayout>
 
@@ -100,6 +101,57 @@
 
 
         </LinearLayout>
+
+        <android.support.constraint.ConstraintLayout
+            android:layout_width="147dp"
+            android:layout_height="149dp"
+            android:layout_below="@+id/food_image"
+            android:layout_alignEnd="@+id/food_image"
+            android:layout_marginTop="-10dp"
+            android:layout_marginEnd="13dp"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/Fsuan"
+                android:layout_width="@dimen/tagSize"
+                android:layout_height="@dimen/tagSize"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/ning_meng" />
+
+            <ImageView
+                android:id="@+id/FTian"
+                android:layout_width="@dimen/tagSize"
+                android:layout_height="@dimen/tagSize"
+                android:layout_marginStart="8dp"
+                android:layout_marginBottom="8dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:srcCompat="@drawable/dan_gao" />
+
+            <ImageView
+                android:id="@+id/FKu"
+                android:layout_width="@dimen/tagSize"
+                android:layout_height="@dimen/tagSize"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/ku" />
+
+            <ImageView
+                android:id="@+id/FLa"
+                android:layout_width="@dimen/tagSize"
+                android:layout_height="@dimen/tagSize"
+                android:layout_marginEnd="8dp"
+                android:layout_marginBottom="8dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:srcCompat="@drawable/lajiao" />
+        </android.support.constraint.ConstraintLayout>
+
 
     </RelativeLayout>
 

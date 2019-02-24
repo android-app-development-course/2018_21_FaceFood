@@ -175,6 +175,11 @@ public class HomeFragment extends Fragment {
                                         map.put("images", jsonObject.getString("images"));
                                         String id = jsonObject.getString("userID");
                                         map.put("userID",jsonObject.getString("userID"));
+
+                                        map.put("food_suan",jsonObject.getInt("food_suan"));
+                                        map.put("food_tian",jsonObject.getInt("food_tian"));
+                                        map.put("food_ku",jsonObject.getInt("food_ku"));
+                                        map.put("food_la",jsonObject.getInt("food_la"));
                                         normalItems.add(map);
                                     }
                                 }

@@ -18,7 +18,7 @@ public class PagerAdapter extends FragmentPagerAdapter {
         if (Position == 0) {
             return new HomeFragment();
         }
-        else if(Position == 1 || Position == 2) {
+        else if(Position == 1 ) {
             return new MineFragment();
         }
         return null;
@@ -26,7 +26,7 @@ public class PagerAdapter extends FragmentPagerAdapter {
 
     @Override
     public int getCount() {
-        return 3;
+        return 2;
     }
 
     @Override
@@ -35,8 +35,6 @@ public class PagerAdapter extends FragmentPagerAdapter {
             case 0:
                 return "推荐";
             case 1:
-                return "关注";
-            case 2:
                 return "我的";
             default:
                 return null;

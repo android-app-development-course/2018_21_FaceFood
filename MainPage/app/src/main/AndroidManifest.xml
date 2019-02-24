@@ -4,6 +4,7 @@
 
     <application
         android:allowBackup="true"
+        android:largeHeap="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
@@ -30,6 +31,7 @@
         <activity android:name=".DetailedActivity" />
         <activity android:name=".SignUp" android:noHistory="true"></activity>
         <activity android:name="com.example.cyy.controller.OtherUserInfo"></activity>
+        <activity android:name="com.example.cyy.controller.FlavourChose"></activity>
     </application>
 
 

@@ -127,6 +127,11 @@
     <string name="DeleteNormal">Del</string>
     <string name="AlreadyDelete">This share was deleted already.</string>
     <string name="badNetWork">Bad network</string>
+    <string name="choseFlavour"><![CDATA[Chose the flavour >]]></string>
+    <string name="sour_degree">Sour Degree</string>
+    <string name="sweet_degree">Sweet Degree</string>
+    <string name="bitter_degree">Bitter Degree</string>
+    <string name="spicy_degree">Spicy Degree</string>
 
 
 </resources>
