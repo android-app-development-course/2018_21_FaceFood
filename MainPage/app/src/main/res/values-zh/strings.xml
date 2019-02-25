@@ -133,5 +133,6 @@
     <string name="sweet_degree">甜度</string>
     <string name="bitter_degree">苦度</string>
     <string name="spicy_degree">辣度</string>
+    <string name="CommentAlreadyDelete">评论已删除</string>
 </resources>
 
