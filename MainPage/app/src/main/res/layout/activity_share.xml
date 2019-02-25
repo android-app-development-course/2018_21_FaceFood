@@ -16,15 +16,16 @@
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:src="@mipmap/arrow180"/>
+
         <TextView
             android:id="@+id/evRelease"
+            android:layout_width="34dp"
+            android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginLeft="270dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:text="发表"
             android:textColor="#19c90c"
-            android:textSize="15sp"
-            android:text="发表"/>
+            android:textSize="15sp" />
     </LinearLayout>
 
     <EditText

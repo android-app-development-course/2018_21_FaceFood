@@ -215,7 +215,6 @@ public class ShareActivity extends AppCompatActivity {
                 sin_bmp = BitmapFactory.decodeStream(is);
                 ig.setImageBitmap(sin_bmp);
                 */
-
                 upload();
             }
         });
