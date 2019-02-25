@@ -199,7 +199,7 @@ public class DetailedActivity extends AppCompatActivity implements CommentDialog
         Map<String, Object> oneComment = new HashMap<>();
         oneComment.put("username", username);
         oneComment.put("commentContent", commentContent);
-        oneComment.put("user_id",student_number);
+        oneComment.put("student_number",student_number);
         commentListData.add(oneComment);//加上评论
 
         //上传评论到数据库
@@ -257,6 +257,8 @@ public class DetailedActivity extends AppCompatActivity implements CommentDialog
                                         Map<String, Object> oneCommentInfo = new HashMap<>();
                                         oneCommentInfo.put("username", oneComment.getString("username"));
                                         oneCommentInfo.put("commentContent", oneComment.get("commentContent"));
+                                        oneCommentInfo.put("student_number", oneComment.get("student_number"));
+                                        oneCommentInfo.put("commentID", oneComment.get("commentID"));
                                         commentListData.add(oneCommentInfo);
                                     }
                                     myFragmentPagerAdapter.setCommentList(commentListData);

@@ -132,6 +132,7 @@
     <string name="sweet_degree">Sweet Degree</string>
     <string name="bitter_degree">Bitter Degree</string>
     <string name="spicy_degree">Spicy Degree</string>
+    <string name="CommentAlreadyDelete">This comment was deleted already.</string>
 
 
 </resources>
