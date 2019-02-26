@@ -30,6 +30,7 @@ import cz.msebera.android.httpclient.Header;
 import cz.msebera.android.httpclient.entity.StringEntity;
 import com.example.cyy.util.BackEnd;
 
+
 public class HomeFragment extends Fragment {
     private View view;
     private ListView foodListView;
@@ -156,6 +157,7 @@ public class HomeFragment extends Fragment {
                         @Override
                         public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
                             try {
+
                                 String json = new String(responseBody, "utf-8");
                                 JSONObject response = new JSONObject(json);
                                 String hasNormal = response.getString("hasNormal");
@@ -167,7 +169,12 @@ public class HomeFragment extends Fragment {
                                         map.put("id", jsonObject.getString("id"));
                                         map.put("food_name", jsonObject.getString("nickname"));
                                         map.put("food_image", jsonObject.getString("image_path"));
-                                        map.put("food_time", jsonObject.getString("date_time"));
+
+                                        String food_time=jsonObject.getString("date_time");//因为后台传到前面格式不同，懒得改post，所以直接暴力格式
+                                        food_time=food_time.replace("T"," ");
+                                        food_time=food_time.replace(".000Z","");
+                                        map.put("food_time", food_time);
+
                                         map.put("food_place", jsonObject.getString("eat_place"));
                                         map.put("food_up", jsonObject.getString("upup"));
                                         map.put("food_down", jsonObject.getString("downdown"));
